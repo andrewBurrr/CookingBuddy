@@ -1,0 +1,28 @@
+﻿.oi {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: central;
+    top: -2px;
+}
+
+.nav-item {
+    font-size: 0.9rem;
+    padding: 0;
+}
+
+    .nav-item ::deep a {
+        color: #808080;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+        .nav-item ::deep a.active {
+            color: black;
+        }
+
+        .nav-item ::deep a:hover {
+            color: black;
+        }
