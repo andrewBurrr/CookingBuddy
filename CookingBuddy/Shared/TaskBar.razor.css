@@ -7,7 +7,7 @@
 
 .nav-item {
     font-size: 0.9rem;
-    padding: 0;
+    padding-bottom: 0.5rem;
 }
 
     .nav-item ::deep a {

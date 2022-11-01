@@ -46,4 +46,8 @@
         <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Blazorise" />
+      <None Remove="Blazorise.Icons.FontAwesome" />
+    </ItemGroup>
 </Project>
