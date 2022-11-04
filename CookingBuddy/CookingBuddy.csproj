@@ -49,5 +49,35 @@
     <ItemGroup>
       <None Remove="Blazorise" />
       <None Remove="Blazorise.Icons.FontAwesome" />
+      <None Remove="Pages\home\" />
+      <None Remove="Pages\learn\" />
+      <None Remove="Pages\add\" />
+      <None Remove="Pages\search\" />
+      <None Remove="Pages\recipebook\" />
+      <None Remove="Pages\auth\" />
+      <None Remove="Pages\home\components\" />
+      <None Remove="sqlite-net-pcl" />
+      <None Remove="Data\" />
+      <None Remove="Pages\learn\components\" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Pages\home\" />
+      <Folder Include="Pages\learn\" />
+      <Folder Include="Pages\add\" />
+      <Folder Include="Pages\search\" />
+      <Folder Include="Pages\recipebook\" />
+      <Folder Include="Pages\auth\" />
+      <Folder Include="Pages\home\components\" />
+      <Folder Include="wwwroot\css\bootstrap-icons\" />
+      <Folder Include="wwwroot\css\bootstrap-icons\fonts\" />
+      <Folder Include="Data\" />
+      <Folder Include="Pages\learn\components\" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Remove="wwwroot\css\bootstrap-icons\" />
+      <Content Remove="wwwroot\css\bootstrap-icons\fonts\" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     </ItemGroup>
 </Project>

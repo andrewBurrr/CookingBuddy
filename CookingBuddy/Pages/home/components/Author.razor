@@ -1,0 +1,25 @@
+﻿@*<div class="card card-block mx-2" style="min-width: 5rem">
+    <img src=@Src class="card-img-top" alt="...">
+    <div class="card-body" style="padding-top: 0.25em; padding-bottom: 0">
+        <h5 class="card-title">@Name</h5>
+        <a href=@Link class="stretched-link"></a>
+    </div>
+</div>*@
+
+<div class="mx-2" style="min-width: 5rem">
+    <a style="display:inline-block;" href=@Link>
+        <img src=@Src class="rounded-circle shadow-4-strong" alt="..." />
+    </a>
+    <h6 class="title text-center">@Name</h6>
+</div>
+
+@code {
+    [Parameter]
+    public string Src { get; set; }
+
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string Link { get; set; }
+}
