@@ -1,0 +1,33 @@
+﻿@*<div class="card">
+    <div class="row g-0">
+
+    </div>
+    <div class="col-md-4">
+        <img class="img-fluid rounded-start" src=@Src alt="...">
+    </div>
+    <div class="col-md-8">
+        <h4 class="card-title">@Title</h4>
+        <a href=@Url class="stretched-link"></a>
+    </div>
+</div>*@
+
+<div class="card">
+    <div class="image pull-left">
+        <img src=@Src>
+    </div>
+    <div class="content pull-left">
+        <h1 class="card-title">@Title</h1>
+        <a href=@Link class="stretched-link"></a>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Link { get; set; }
+
+    [Parameter]
+    public string Src { get; set; }
+}
