@@ -52,6 +52,8 @@
       <None Remove="Pages\home\" />
       <None Remove="Pages\learn\" />
       <None Remove="Pages\add\" />
+      <None Remove="Pages\recipebook\components\RecipeBook.razor.css" />
+      <None Remove="Pages\recipebook\RecipeBook.razor.css" />
       <None Remove="Pages\search\" />
       <None Remove="Pages\recipebook\" />
       <None Remove="Pages\auth\" />
@@ -64,7 +66,6 @@
       <Folder Include="Pages\home\" />
       <Folder Include="Pages\learn\" />
       <Folder Include="Pages\add\" />
-      <Folder Include="Pages\recipebook\" />
       <Folder Include="Pages\auth\" />
       <Folder Include="Pages\home\components\" />
       <Folder Include="wwwroot\css\bootstrap-icons\" />
@@ -75,6 +76,9 @@
     <ItemGroup>
       <Content Remove="wwwroot\css\bootstrap-icons\" />
       <Content Remove="wwwroot\css\bootstrap-icons\fonts\" />
+    </ItemGroup>
+    <ItemGroup>
+      <Content Include="Pages\recipebook\RecipeBook.razor.css" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />

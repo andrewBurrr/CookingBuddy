@@ -1,0 +1,52 @@
+﻿@using CookingBuddy.Pages.search.model;
+
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="@src" class="img-fluid img-size" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body custom-card">
+                <div class="container text-end" style="padding: 0">
+                    <div class="row">
+                        <div class="col text-start">
+                            <small class="text-muted small-text"><span class="oi bi bi-star-fill"></span> @recipe.rating</small>
+
+                        </div>
+                        <div class="col">
+                            <span class="oi bi bi-heart-fill" style="color: palevioletred"></span>
+                        </div>
+                    </div>
+                </div>
+                <h6 class="card-title">@recipe.title</h6>
+                <small class="text-muted">By @recipe.author</small><br />
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <small class="small-text text-muted">@recipe.calories kcal</small>
+                        </div>
+                        <div class="col">
+                            <small class="small-text text-muted"><span class="oi bi bi-cash-stack"></span> $@recipe.price</small>
+                        </div>
+                        <div class="col">
+                            <small class="small-text text-muted"><span class="oi bi bi-clock"></span> @recipe.time</small>
+                        </div>
+                        <div class="col">
+                            <small class="small-text text-muted"><span class="oi bi bi-hammer"></span> @recipe.difficulty</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public string src { get; set; }
+
+    [Parameter]
+    public RecipeInformation recipe { get; set; }
+
+}
