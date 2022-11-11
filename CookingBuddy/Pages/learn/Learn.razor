@@ -1,3 +1,37 @@
 ﻿@page "/learn"
 
-<h3>Hello from learn page</h3>
+@using CookingBuddy.Pages.search.model;
+
+
+<div class="container">
+    
+    <h1>
+        Learn
+    </h1>
+
+</div>
+
+<div class="container body-container" >
+    <input class="form-control" type="text" placeholder="Search..." aria-label="default input example">
+    <br />
+    <CookingBuddy.Pages.learn.components.Lesson src="https://c.stocksy.com/a/M5h000/z0/165624.jpg" author="Jay Balvin" title="Dice 101" rating="5.0" hasVideo=true />
+    <CookingBuddy.Pages.learn.components.Lesson src="https://res.cloudinary.com/bunch-media-library/image/upload/v1575061943/articles/ro9zhhmrewviaw0ewooo.jpg" author="Greg Roy" title="Kitchen Tools" rating="3.9" hasVideo=false />
+    <CookingBuddy.Pages.learn.components.Lesson src="https://i.ytimg.com/vi/ISGbUMaDC7w/hqdefault.jpg" author="George Macky" title="How to Julienne an Onion" rating="4.2" hasVideo=true />
+    
+
+
+
+
+</div>
+
+@code {
+    public RecipeInformation[] recipesArray = new RecipeInformation[]
+    {
+        new RecipeInformation ( author : "Chef roberto", title : "Alfredo Pasta", calories : "300", difficulty : "Expert", price : "14.48", rating : "4.8", time : "30 mins" ),
+        new RecipeInformation ( author : "Vanity", title : "Sourdough Bread", calories : "650", difficulty : "Home cook", price : "14.00", rating : "4.3", time : "2 hrs" )
+
+    };
+
+
+
+}
