@@ -1,0 +1,15 @@
+.container.body-container {
+    padding: 0px;
+    height: 500px
+    
+}
+.container.search-container {
+    background-color: white;
+    
+}
+
+.remove-padding{
+    padding: 0px
+}
+
+

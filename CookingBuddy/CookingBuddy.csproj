@@ -64,7 +64,6 @@
       <Folder Include="Pages\home\" />
       <Folder Include="Pages\learn\" />
       <Folder Include="Pages\add\" />
-      <Folder Include="Pages\search\" />
       <Folder Include="Pages\recipebook\" />
       <Folder Include="Pages\auth\" />
       <Folder Include="Pages\home\components\" />
