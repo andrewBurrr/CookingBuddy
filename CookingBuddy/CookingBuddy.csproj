@@ -74,6 +74,7 @@
       <Folder Include="Pages\home\" />
       <Folder Include="Pages\add\" />
       <Folder Include="Pages\home\components\" />
+      <Folder Include="Pages\LetsCook\components\" />
       <Folder Include="wwwroot\css\bootstrap-icons\" />
       <Folder Include="wwwroot\css\bootstrap-icons\fonts\" />
       <Folder Include="Data\" />
