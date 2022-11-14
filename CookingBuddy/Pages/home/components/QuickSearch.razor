@@ -1,24 +1,9 @@
-﻿@*<div class="card">
-    <div class="row g-0">
-
-    </div>
-    <div class="col-md-4">
-        <img class="img-fluid rounded-start" src=@Src alt="...">
-    </div>
-    <div class="col-md-8">
-        <h4 class="card-title">@Title</h4>
-        <a href=@Url class="stretched-link"></a>
-    </div>
-</div>*@
-
-<div class="card">
-    <div class="image pull-left">
-        <img src=@Src>
-    </div>
-    <div class="content pull-left">
-        <h1 class="card-title">@Title</h1>
-        <a href=@Link class="stretched-link"></a>
-    </div>
+﻿<div class="bg-image card shadow-2-strong" style="background-image: url(@Src); background-size: cover; background-position: center; background-repeat: no-repeat; min-height: 30vw">
+    <a href=@Link style="text-decoration: none">
+        <div class="card-body text-white">
+            <h4 class="card-title text-center">@Title</h4>
+        </div>
+    </a>
 </div>
 
 @code {

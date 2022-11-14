@@ -1,19 +1,11 @@
-﻿/*img {
-    width: 100%;
-    border-radius: 40%;
-    margin: 0 auto;
-    box-shadow: 0 0 10px rgba(0,0,0,.2);
-}*/
-
-/*.card {
-    padding: .5em .05em .05em;
-    border-radius: 2em;
-    text-align: center;
-    box-shadow: 0 2.5px 5px rgba(0,0,0,.2);
-}*/
-
-.title {
+﻿.title {
     font-weight: 500;
-    font-size: 2vw;
+    font-size: 18px;
     white-space: nowrap;
+}
+
+div {
+    min-width: 5rem;
+    min-height: 5rem;
+    display: inline-block;
 }

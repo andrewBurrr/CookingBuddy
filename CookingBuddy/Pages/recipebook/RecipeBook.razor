@@ -1,39 +1,82 @@
 ﻿@page "/recipebook"
-
+@using QRCoder;
+@using System.Drawing;
+@using System.Drawing.Imaging;
+@using System.IO;
 
 @using CookingBuddy.Pages.search.model;
 
-
-<div class="container">
-    <div class="container text-end">
-        <span class="oi bi bi-share-fill"></span>
-
-    </div>
-    <h1>
-        Recipe Book
-    </h1>
-    
+<div class="container text-end">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <i class="bi bi-share-fill"></i>
+    </button>
 </div>
 
-<div class="container body-container" >
-    <input class="form-control" type="text" placeholder="Search..." aria-label="default input example">
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Share Recipe Book</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex justify-content-center">
+                <img src="https://live.staticflickr.com/4105/5051807404_f7d514212c_z.jpg" style="width:200px;height:200px;" />
+            </div>
+        </div>
+    </div>
+</div>
+<h1 class="text-center">Recipe Book</h1>
+<div class="container">
+    <input class="form-control d-flex w-100 justify-content-center" type="text" placeholder="Search..." aria-label="default input example">
     <br />
-     <a href="/ViewRecipeLocal"><CookingBuddy.Pages.recipebook.components.RecipeCard src="https://www.tasteandtellblog.com/wp-content/uploads/2020/01/Alfredo-Pasta-Bacon-tasteandtellblog.com-1.jpg" recipe=@recipesArray[0] /></a>
-    <a href="/ViewRecipe"><CookingBuddy.Pages.recipebook.components.RecipeCard src="https://makeyourmeals.com/wp-content/uploads/2019/06/featured-grilled-steak-735x490.jpg.webp" recipe=@recipesArray[1] /></a>
 
-
-
-
+    <div class="row">
+        <div class="col-md-auto">
+            <CookingBuddy.Pages.recipebook.components.RecipeCard src="https://www.tasteandtellblog.com/wp-content/uploads/2020/01/Alfredo-Pasta-Bacon-tasteandtellblog.com-1.jpg" recipe=@recipesArray[0] />
+        </div>
+        <div class="col-md-auto">
+            <CookingBuddy.Pages.recipebook.components.RecipeCard src="https://www.mygreekdish.com/wp-content/uploads/2021/03/Beginners-sourdough-bread-recipe-Bread-with-prozimi-baked-2-1536x1296.jpeg" recipe=@recipesArray[1] />
+        </div>
+    <div/>
 </div>
 
 @code {
     public RecipeInformation[] recipesArray = new RecipeInformation[]
     {
-        new RecipeInformation ( author : "Chef roberto", title : "Alfredo Pasta", calories : "300", difficulty : "Expert", price : "14.48", rating : "4.8", time : "30 mins" ),
-        new RecipeInformation ( author : "Vanity", title : "Grilled Steak", calories : "650", difficulty : "Home cook", price : "14.00", rating : "4.3", time : "2 hrs" )
+    new RecipeInformation ( author : "Chef roberto", title : "Alfredo Pasta", calories : "300", difficulty : "Expert", price : "14.48", rating : "4.8", time : "30 mins" ),
+    new RecipeInformation ( author : "Vanity", title : "Sourdough Bread", calories : "650", difficulty : "Home cook", price : "14.00", rating : "4.3", time : "2 hrs" )
 
-    };
+            };
 
+    string Link { get; set; } = "https://google.ca";
+    string QRCodeStr { get; set; } = "";
 
+    public void GenerateQRCode()
+    {
+        QRCodeStr = "";
+        if (!string.IsNullOrEmpty(Link))
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                QRCodeGenerator oQRCodeGenerator = new QRCodeGenerator();
+                QRCodeData oQRCodeData = oQRCodeGenerator.CreateQrCode(Link, QRCodeGenerator.ECCLevel.Q);
+                QRCode oQRCode = new QRCode(oQRCodeData);
+                using (Bitmap oBitmap = oQRCode.GetGraphic(20))
+                {
+                    oBitmap.Save(memoryStream, ImageFormat.Png);
+                    QRCodeStr = "data:image/png;base64," + Convert.ToBase64String(memoryStream.ToArray());
+                }
+            }
+        }
+    }
+
+    @*protected override void OnInitialized()
+        {
+            GenerateQRCode();
+        }*@
 
 }
