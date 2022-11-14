@@ -1,0 +1,37 @@
+﻿@*@using QRCoder;
+@using System.Drawing;
+@using System.Drawing.Imaging;
+@using System.IO;
+
+<h3>Share page</h3>
+<br/>
+<br/>
+<img src="@QRCodeStr" style="width:200px;height:200px;" />
+
+@code {
+    [Parameter]
+    public string Link { get; set; }
+
+    string QRCodeStr { get; set; } = "";
+
+    public void GenerateQRCode() {
+        QRCodeStr = "";
+        if (!string.IsNullOrEmpty(Link)) {
+            using (MemoryStream memoryStream = new MemoryStream()) {
+                QRCodeGenerator oQRCodeGenerator = new QRCodeGenerator();
+                QRCodeData oQRCodeData = oQRCodeGenerator.CreateQrCode(Link, QRCodeGenerator.ECCLevel.Q);
+                QRCode oQRCode = new QRCode(oQRCodeData);
+                using (Bitmap oBitmap = oQRCode.GetGraphic(20)) {
+                    oBitmap.Save(memoryStream, ImageFormat.Png);
+                    QRCodeStr = "data:image/png;base64," + Convert.ToBase64String(memoryStream.ToArray());
+                }
+            }
+        }
+    }
+
+    protected override async Task OnInitializedAsync() {
+        GenerateQRCode();
+        await Task.CompletedTask;
+    }
+}*@
+
