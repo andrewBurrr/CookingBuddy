@@ -1,3 +1,177 @@
 ﻿@page "/post"
 
-<h3>Hello from post page</h3>
+<h3>Add a Recipe</h3>
+
+<div class="container p-5 my-5 border">
+
+<div class="format
+">
+
+    <form action="/action_page.php">
+
+        <!--Title section-->
+            <div class="font-bold" for="input_Title" required>Title</div>
+            <div>
+                <div class="input-group">
+                    <input type="text" placeholder="Enter title here..." />
+                </div>
+                <button type="button" class="button_format">Save</button>
+            </div>
+
+        <!--Insert section-->
+        <form action="/action_page.php">
+            <label for="png" class="font-bold">Add an image:</label>
+            <input type="file" id="png" name="png" accept="png/*">
+        </form>
+
+
+        <form action="/action_page.php">
+
+            <label for="mp4" class="font-bold">Add a video:</label>
+            <input type="file" id="mp4" name="mp4" accept="mp4/*">
+
+        </form>
+
+        <!--Price per serving section-->
+
+      
+            <div class="block">
+                 <div class="font-bold">PRICE $ </div>
+                <input type="text" placeholder="" />
+                <div> / Serving</div>
+            </div>
+            <div class="block">
+                 <div class="font-bold">YIELD  </div>
+                <input type="text" placeholder="" />
+                <div> Servings</div>
+            </div>
+            <div class="block">
+                <div class="font-bold">TIME  </div>
+                <input type="text" class="input-field" placeholder="" />
+                <span class="input-group-addon"></span>
+
+            <div class="input-field">
+                <select>
+                    <option>s</option>
+                    <option>min</option>
+                    <option>hour</option>
+                </select>
+            </div>
+
+                <button type="button" class="button_format" required>Save</button>
+        </div>
+
+        <!--Recipe section-->
+        <div class="font-bold" for="input_Recipe">Recipe</div>
+        <div>
+            <div class="input-group">
+                    <textarea name="input_nutrition" rows="7" placeholder='Enter recipe info here:' required></textarea>
+            </div>
+            <button type="button" class="button_format">Save</button>
+
+        </div>
+
+        <!--Nutrition section-->
+        <div class="font-bold" for="input_Nutrition">Nutrition</div>
+            <div>
+                <button onclick=""> + Add Nutritional Facts</button>
+
+                <div class="input-group">
+                    <input type="text" placeholder="" />
+                    <span class="input-group-addon"></span>
+                </div>
+
+            </div>
+
+        </form>
+     </div>
+
+
+<!--Ingredient section-->
+<div class="font-bold" for="input_Ingredients">Ingredients</div>
+<div>
+    <div class="input-group">
+        <input type="text" placeholder="Quantity" />
+        <span class="input-group-addon"></span>
+        <input type="text" placeholder="Ingredients" />
+    </div>
+
+<div class="input-group">
+    <input type="text" placeholder="Quantity" />
+    <span class="input-group-addon"></span>
+    <input type="text" placeholder="Ingredients" />
+</div>
+
+        <button onclick=""> + Add Ingredients</button>
+
+    </div>
+
+<i class="fa-solid fa-plus"></i>
+        <button type="button" class="button_format">Save</button>
+
+
+<!-- Tab links -->
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Default')">Default</button>
+    <button class="tablinks" onclick="openCity(event, 'Stage2')">Stage 2</button>
+    <button class="tablinks" onclick="openCity(event, 'AddStage')">+Add Stage</button>
+</div>
+
+<!-- Tab content -->
+<div id="Default" class="tabcontent">
+    <h3>Default</h3>
+    <p>Default Page</p>
+</div>
+
+<div id="Stage2" class="tabcontent">
+    <h3>Stage 2</h3>
+    <p>Stage 2 Page</p>
+</div>
+
+<Button id="AddStage" class="tabcontent">
+    <h3>+Add Stage</h3>
+    <p>Add a Page</p>
+</Button>
+
+
+
+
+<!--Steps section-->
+
+<section>
+    <div class="card">
+        <div class="card-image"></div>
+        <h2>Step 1</h2>
+        <div class="font-bold">Description</div>
+        <textarea name="input_nutrition" rows="8" placeholder='Add description here...:' required></textarea>
+        <button type="button" class="button_format">+Add Step</button>
+
+    </div>
+
+            <button type="button" class="button_format">Save</button>
+</section>
+
+<!--fixed buttons for save draft and post section-->
+<div class="fixed-btn">
+    <p>Save as Draft</p>
+</div>
+
+<div class="fixed-btn2">
+    <p>Post</p>
+</div>
+
+
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string Link { get; set; }
+
+    [Parameter]
+    public string Src { get; set; }
+}
+
+
