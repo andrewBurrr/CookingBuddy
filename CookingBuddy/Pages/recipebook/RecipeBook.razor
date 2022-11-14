@@ -19,7 +19,7 @@
     <input class="form-control" type="text" placeholder="Search..." aria-label="default input example">
     <br />
     <CookingBuddy.Pages.recipebook.components.RecipeCard src="https://www.tasteandtellblog.com/wp-content/uploads/2020/01/Alfredo-Pasta-Bacon-tasteandtellblog.com-1.jpg" recipe=@recipesArray[0] />
-    <CookingBuddy.Pages.recipebook.components.RecipeCard src="https://www.mygreekdish.com/wp-content/uploads/2021/03/Beginners-sourdough-bread-recipe-Bread-with-prozimi-baked-2-1536x1296.jpeg" recipe=@recipesArray[1] />
+    <a href="/ViewRecipe"><CookingBuddy.Pages.recipebook.components.RecipeCard src="https://makeyourmeals.com/wp-content/uploads/2019/06/featured-grilled-steak-735x490.jpg.webp" recipe=@recipesArray[1] /></a>
 
 
 
@@ -30,7 +30,7 @@
     public RecipeInformation[] recipesArray = new RecipeInformation[]
     {
         new RecipeInformation ( author : "Chef roberto", title : "Alfredo Pasta", calories : "300", difficulty : "Expert", price : "14.48", rating : "4.8", time : "30 mins" ),
-        new RecipeInformation ( author : "Vanity", title : "Sourdough Bread", calories : "650", difficulty : "Home cook", price : "14.00", rating : "4.3", time : "2 hrs" )
+        new RecipeInformation ( author : "Vanity", title : "Grilled Steak", calories : "650", difficulty : "Home cook", price : "14.00", rating : "4.3", time : "2 hrs" )
 
     };
 
