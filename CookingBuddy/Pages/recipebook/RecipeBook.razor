@@ -1,36 +1,37 @@
 ﻿@page "/recipebook"
 
-
 @using CookingBuddy.Pages.search.model;
 
-
-<div class="container">
-    <div class="container text-end">
-        <span class="oi bi bi-share-fill"></span>
-
-    </div>
-    <h1>
-        Recipe Book
-    </h1>
-    
+@* Button trigger for QR Code share link *@
+<!--<div class="container text-end">
+    <a data-bs-toggle="modal" data-bs-target="#share">
+        <span class="bi bi-share-fill"></span>
+    </a>
 </div>
 
-<div class="container body-container" >
-    <input class="form-control" type="text" placeholder="Search..." aria-label="default input example">
+<div class="modal-dialog modal-dialog-centered">
+    <CookingBuddy.Pages.recipebook.components.QR link="https://google.ca"></CookingBuddy.Pages.recipebook.components.QR>
+</div>-->
+
+<h1 class="text-center">Recipe Book</h1>
+<div class="container">
+    <input class="form-control d-flex w-100 justify-content-center" type="text" placeholder="Search..." aria-label="default input example">
     <br />
-    <CookingBuddy.Pages.recipebook.components.RecipeCard src="https://www.tasteandtellblog.com/wp-content/uploads/2020/01/Alfredo-Pasta-Bacon-tasteandtellblog.com-1.jpg" recipe=@recipesArray[0] />
-    <CookingBuddy.Pages.recipebook.components.RecipeCard src="https://www.mygreekdish.com/wp-content/uploads/2021/03/Beginners-sourdough-bread-recipe-Bread-with-prozimi-baked-2-1536x1296.jpeg" recipe=@recipesArray[1] />
-
-
-
-
+    <div class="row">
+        <div class="col-md-auto">
+            <CookingBuddy.Pages.recipebook.components.RecipeCard src="https://www.tasteandtellblog.com/wp-content/uploads/2020/01/Alfredo-Pasta-Bacon-tasteandtellblog.com-1.jpg" recipe=@recipesArray[0] />
+        </div>
+        <div class="col-md-auto">
+            <CookingBuddy.Pages.recipebook.components.RecipeCard src="https://www.mygreekdish.com/wp-content/uploads/2021/03/Beginners-sourdough-bread-recipe-Bread-with-prozimi-baked-2-1536x1296.jpeg" recipe=@recipesArray[1] />
+        </div>
+    </div>
 </div>
 
 @code {
     public RecipeInformation[] recipesArray = new RecipeInformation[]
     {
-        new RecipeInformation ( author : "Chef roberto", title : "Alfredo Pasta", calories : "300", difficulty : "Expert", price : "14.48", rating : "4.8", time : "30 mins" ),
-        new RecipeInformation ( author : "Vanity", title : "Sourdough Bread", calories : "650", difficulty : "Home cook", price : "14.00", rating : "4.3", time : "2 hrs" )
+    new RecipeInformation ( author : "Chef roberto", title : "Alfredo Pasta", calories : "300", difficulty : "Expert", price : "14.48", rating : "4.8", time : "30 mins" ),
+    new RecipeInformation ( author : "Vanity", title : "Sourdough Bread", calories : "650", difficulty : "Home cook", price : "14.00", rating : "4.3", time : "2 hrs" )
 
     };
 
