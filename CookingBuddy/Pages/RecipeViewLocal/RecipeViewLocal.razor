@@ -1,0 +1,39 @@
+﻿@page "/ViewRecipeLocal"
+
+
+@using CookingBuddy.Pages.ViewRecipe.model;
+
+<div class="container-fluid  overflow-hidden">
+    <div class="container-fluid border border-top border-bottom">
+        <CookingBuddy.Pages.ViewRecipe.components.RecipeTitleBar recipe=@recipeTitle></CookingBuddy.Pages.ViewRecipe.components.RecipeTitleBar>
+    </div>
+    <div class="container-fluid border border-top border-bottom overflow-auto">
+        <CookingBuddy.Pages.ViewRecipe.components.RecipeContentBody recipe=@recipeBody></CookingBuddy.Pages.ViewRecipe.components.RecipeContentBody>
+    </div>
+    <div class="container-fluid border border-top border-bottom">
+        <div class="row">
+        <div class="col">
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Rosmary version
+                </a>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">Rosmary version</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col">
+        <a href="/LetsCook" class="btn btn-info" role="button">Lets Cook</a>
+        </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    RecipeTitleBarModel recipeTitle = new RecipeTitleBarModel("https://makeyourmeals.com/wp-content/uploads/2019/06/featured-grilled-steak-735x490.jpg.webp"
+                , "Grilled Steak");
+    RecipeBodyModel recipeBody = new RecipeBodyModel("Cooking Buddy", "easy", "3.5", "30 mins", "500 cal", "Perfectly Grilled Steak", "Spatula", "2lb Steak,1tbsp Salt,2tbsp Butter,Black Pepper to taste,0.5 tbsp Olive Oil", "50$", "3");
+}
