@@ -58,6 +58,7 @@
       <None Remove="Pages\recipebook\" />
       <None Remove="Pages\auth\" />
       <None Remove="Pages\home\components\" />
+      <None Remove="Resources\Images\profile_picture_placeholder.jpg" />
       <None Remove="sqlite-net-pcl" />
       <None Remove="Data\" />
       <None Remove="Pages\learn\components\" />
@@ -82,6 +83,9 @@
     <ItemGroup>
       <Content Remove="wwwroot\css\bootstrap-icons\" />
       <Content Remove="wwwroot\css\bootstrap-icons\fonts\" />
+    </ItemGroup>
+    <ItemGroup>
+      <MauiImage Remove="Resources\Images\profile_picture_placeholder.jpg" />
     </ItemGroup>
     <ItemGroup>
       <Content Include="Pages\recipebook\RecipeBook.razor.css" />
