@@ -56,6 +56,9 @@
         <div class="col-auto">
             <h1>Ingredients</h1>
         </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-secondary">Substitute</button>
+        </div>
     </div>
     @foreach(var @i in @recipe.ingredients.Split(",")){
     <div class="row align-items-center justify-content-between">
@@ -64,7 +67,12 @@
             @i
         </div>
         <div class="col-auto">
-                <button type="button" class="btn btn-secondary">Modify</button>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        
+                    </label>
+                </div>
        </div>      
     </div>
     }

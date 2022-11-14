@@ -68,6 +68,8 @@
       <Folder Include="Pages\auth\" />
       <Folder Include="Pages\home\components\" />
       <Folder Include="Pages\LetsCook\components\" />
+      <Folder Include="Pages\RecipeViewLocal\components\" />
+      <Folder Include="Pages\RecipeViewLocal\models\" />
       <Folder Include="wwwroot\css\bootstrap-icons\" />
       <Folder Include="wwwroot\css\bootstrap-icons\fonts\" />
       <Folder Include="Data\" />
