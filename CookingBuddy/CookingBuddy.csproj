@@ -58,14 +58,21 @@
       <None Remove="Pages\recipebook\" />
       <None Remove="Pages\auth\" />
       <None Remove="Pages\home\components\" />
+      <None Remove="Resources\Images\profile_picture_placeholder.jpg" />
       <None Remove="sqlite-net-pcl" />
       <None Remove="Data\" />
       <None Remove="Pages\learn\components\" />
+      <None Remove="BootstrapBlazor.BarCode" />
+      <None Remove="BootstrapBlazor" />
+      <None Remove="NETStandardQRCode" />
+      <None Remove="Syncfusion.Blazor.BarcodeGenerator" />
+      <None Remove="QRCoderNetCore" />
+      <None Remove="System.Drawing.Common" />
+      <None Remove="bootstrap" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Pages\home\" />
       <Folder Include="Pages\add\" />
-      <Folder Include="Pages\auth\" />
       <Folder Include="Pages\home\components\" />
       <Folder Include="Pages\LetsCook\components\" />
       <Folder Include="wwwroot\css\bootstrap-icons\" />
@@ -78,9 +85,14 @@
       <Content Remove="wwwroot\css\bootstrap-icons\fonts\" />
     </ItemGroup>
     <ItemGroup>
+      <MauiImage Remove="Resources\Images\profile_picture_placeholder.jpg" />
+    </ItemGroup>
+    <ItemGroup>
       <Content Include="Pages\recipebook\RecipeBook.razor.css" />
     </ItemGroup>
     <ItemGroup>
-      <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+      <PackageReference Include="QRCoderNetCore" Version="1.0.0" />
+      <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+      <PackageReference Include="bootstrap" Version="5.2.2" />
     </ItemGroup>
 </Project>
