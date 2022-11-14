@@ -1,0 +1,39 @@
+﻿@page "/manageRecipe"
+@using CookingBuddy.Pages.search.model;
+
+
+<div class="container">
+    <div class="container text-end">
+        <span class="oi bi bi-share-fill"></span>
+
+    </div>
+    <h1>
+        Manage Recipe
+    </h1>
+
+</div>
+
+<div class="container body-container">
+    <input class="form-control" type="text" placeholder="Search..." aria-label="default input example">
+    <br />
+    <CookingBuddy.Pages.auth.components.RecipeCard src="https://i1.wp.com/www.foodfellas4you.com/wp-content/uploads/2015/02/image287.jpg?resize=750%2C422" recipe=@recipesArray[0] isPosted=true comments="12" />
+    <CookingBuddy.Pages.auth.components.RecipeCard src="https://ehc-west-0-bucket.s3.us-west-2.amazonaws.com/web/documents/pizzashuttle/menu_item_images/item_image_a549fa90-7996-4ed9-8a11-66f0284e8fd6.jpg?2015-01-19+13:15:06" recipe=@recipesArray[1] isPosted=true comments="4" />
+    <CookingBuddy.Pages.auth.components.RecipeCard src="https://assets.bonappetit.com/photos/57acae2d1b33404414975121/master/pass/ultimate-veggie-burger.jpg" recipe=@recipesArray[2] isPosted=false comments="12" />
+
+
+
+</div>
+
+@code {
+    public RecipeInformation[] recipesArray = new RecipeInformation[]
+    {
+        new RecipeInformation ( author : "Chef Janet", title : "Runny Fried Eggs", calories : "300", difficulty : "Expert", price : "14.48", rating : "4.8", time : "30 mins" ),
+        new RecipeInformation ( author : "Chef Janet", title : "Three topping pizza", calories : "650", difficulty : "Home cook", price : "14.00", rating : "4.3", time : "2 hrs" ),
+        new RecipeInformation ( author : "Chef Janet", title : "Vegan Cheese Burger", calories : "780", difficulty : "Expert", price : "19.00", rating : "2.5", time : "2hrs 20min" ),
+
+
+    };
+
+
+
+}
