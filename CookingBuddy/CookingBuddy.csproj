@@ -83,6 +83,7 @@
       <Folder Include="Pages\learn\components\" />
     </ItemGroup>
     <ItemGroup>
+      <Content Remove="Pages\LetsCook\LetsCook - Copy.razor" />
       <Content Remove="wwwroot\css\bootstrap-icons\" />
       <Content Remove="wwwroot\css\bootstrap-icons\fonts\" />
     </ItemGroup>
