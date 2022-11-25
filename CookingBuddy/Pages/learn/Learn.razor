@@ -1,4 +1,7 @@
 ﻿@page "/learn"
+@using CookingBuddy.Models
+@using CookingBuddy.Services
+@inject LessonService LessonService
 
 @using CookingBuddy.Pages.search.model;
 
@@ -7,21 +10,33 @@
     <input class="form-control d-flex w-100 justify-content-center" type="text" placeholder="Search..." aria-label="default input example">
     <br />
     <div class="row">
-        <div class="col-md-auto">
-            <CookingBuddy.Pages.learn.components.Lesson src="https://c.stocksy.com/a/M5h000/z0/165624.jpg" author="Jay Balvin" title="Dice 101" rating="5.0" hasVideo=true />
-        </div>
-        <div class="col-md-auto">
+        @foreach (var lesson in lessons)
+        {
+            <div class="col-md-auto">
+                <a style="text-decoration: none" href="/learnView">
+                    <CookingBuddy.Pages.learn.components.Lesson src="https://c.stocksy.com/a/M5h000/z0/165624.jpg" author="Jay Balvin" title="Dice 101" rating="5.0" hasVideo=true />
+                </a>
+            </div>
+        }
+        
+        @*<div class="col-md-auto">
             <CookingBuddy.Pages.learn.components.Lesson src="https://res.cloudinary.com/bunch-media-library/image/upload/v1575061943/articles/ro9zhhmrewviaw0ewooo.jpg" author="Greg Roy" title="Kitchen Tools" rating="3.9" hasVideo=false />
         </div>
         <div class="col-md-auto">
             <CookingBuddy.Pages.learn.components.Lesson src="https://i.ytimg.com/vi/ISGbUMaDC7w/hqdefault.jpg" author="George Macky" title="How to Julienne an Onion" rating="4.2" hasVideo=true />
-        </div>
+        </div>*@
     </div>
 </div>
 
 @code {
-    public RecipeInformation[] recipesArray = new RecipeInformation[]
+    private LessonModel[]? lessons;
+
+    protected override async Task OnInitializedAsync()
     {
+        lessons = await LessonService.GetLessonAsync();
+    }
+    public RecipeInformation[] recipesArray = new RecipeInformation[]
+{
         new RecipeInformation ( author : "Chef roberto", title : "Alfredo Pasta", calories : "300", difficulty : "Expert", price : "14.48", rating : "4.8", time : "30 mins" ),
         new RecipeInformation ( author : "Vanity", title : "Sourdough Bread", calories : "650", difficulty : "Home cook", price : "14.00", rating : "4.3", time : "2 hrs" )
 
