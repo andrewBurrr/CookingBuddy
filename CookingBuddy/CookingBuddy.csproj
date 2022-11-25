@@ -69,6 +69,11 @@
       <None Remove="QRCoderNetCore" />
       <None Remove="System.Drawing.Common" />
       <None Remove="bootstrap" />
+      <None Remove="FirebaseDatabase.net" />
+      <None Remove="FirebaseAuthentication.net" />
+      <None Remove="FirebaseStorage.net" />
+      <None Remove="Models\" />
+      <None Remove="Services\" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Pages\home\" />
@@ -81,6 +86,8 @@
       <Folder Include="wwwroot\css\bootstrap-icons\fonts\" />
       <Folder Include="Data\" />
       <Folder Include="Pages\learn\components\" />
+      <Folder Include="Models\" />
+      <Folder Include="Services\" />
     </ItemGroup>
     <ItemGroup>
       <Content Remove="Pages\LetsCook\LetsCook - Copy.razor" />
@@ -97,5 +104,6 @@
       <PackageReference Include="QRCoderNetCore" Version="1.0.0" />
       <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
       <PackageReference Include="bootstrap" Version="5.2.2" />
+      <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     </ItemGroup>
 </Project>

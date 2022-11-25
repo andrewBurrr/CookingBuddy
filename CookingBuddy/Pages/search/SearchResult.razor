@@ -1,101 +1,81 @@
 @page "/searchResult"
-
+@using CookingBuddy.Models
+@using CookingBuddy.Services
+@inject RecipeService RecipeService
 
 @using CookingBuddy.Pages.search.model;
 
 <div class="container body-container">
-     <input class="form-control" type="text" placeholder="Chicken Tikka Masala" aria-label="default input example">
-    
-   <div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingOne">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Filters
-      </button>
-      
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-          <div class="container" style="padding-bottom:10px">
-              <label class="form-check-label" for="flexCheckDefault">
-                Total time(mins)
-              </label>
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              
-                        <div class="container custom-card"> 
-                
-                <input type="range"  style="width:90%"/>
-                90            
-               </div>
-              
-          </div> 
-          
-          <div class="container" style="padding-bottom:10px">
-              <label class="form-check-label" for="flexCheckDefault">
-                Calories(kcal)
-              </label>
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              
-                        <div class="container custom-card"> 
-               
-                <input type="range"  style="width:90%"/>
-                950            
-               </div>
-              
-          </div>  
-          <div class="container" style="padding-bottom:10px">
-              <label class="form-check-label" for="flexCheckDefault">
-                Price($)
-              </label>
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              
-                        <div class="container custom-card"> 
-               
-                <input type="range"  style="width:90%"/>
-                100.00            
-               </div>
-              
-          </div>  
-          <div class="container" style="padding-bottom:10px">
-              <label class="form-check-label" for="flexCheckDefault">
-                Ratings
-              </label>
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              
-                        <div class="container custom-card"> 
-               
-                <input type="range"  style="width:90%" step="1" min="0" max="5"/>
-                5            
-               </div>
-              
-          </div>  
-          <div class="container" style="padding-bottom:10px">
-              Difficulty<br/>
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault" style="padding-right:7px">
-                Expert
-              </label>
-
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+    <input class="form-control" type="text" placeholder="Chicken Tikka Masala" aria-label="default input example">
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Filters
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="container" style="padding-bottom:10px">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Total time(mins)
+                        </label>
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <div class="container custom-card">
+                            <input type="range" style="width:90%" />
+                            90
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:10px">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Calories(kcal)
+                        </label>
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <div class="container custom-card">
+                            <input type="range" style="width:90%" />
+                            950
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:10px">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Price($)
+                        </label>
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <div class="container custom-card">
+                            <input type="range" style="width:90%" />
+                            100.00
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:10px">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Ratings
+                        </label>
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <div class="container custom-card">
+                            <input type="range" style="width:90%" step="1" min="0" max="5" />
+                            5
+                        </div>
+                    </div>
+                    <div class="container" style="padding-bottom:10px">
+                        Difficulty<br />
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault" style="padding-right:7px">
-                Home cook
-              </label>
-
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault "style="padding-right:7px">
-                Beginner
-              </label>
-              
-              
-          </div> 
-          <div class="container">
-              Indgredients<br/>
-               <input class="form-control" type="text" placeholder="(e.g Chicken, Lettuce, etc)" aria-label="default input example">
-              
-               <ul class="list-group list-group-flush">
-                
-                    <li class="list-group-item">
-
+                            Expert
+                        </label>
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault" style="padding-right:7px">
+                            Home cook
+                        </label>
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault " style="padding-right:7px">
+                            Beginner
+                        </label>
+                    </div>
+                    <div class="container">
+                        Indgredients<br />
+                        <input class="form-control" type="text" placeholder="(e.g Chicken, Lettuce, etc)" aria-label="default input example">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
                                 <div class="row">
                                     <div class="col">
                                         Saffron
@@ -104,46 +84,54 @@
                                         <span class="oi bi bi-x-circle-fill" style="color:red"></span>
                                     </div>
                                 </div>
-                        
-                    </li>
-                <li class="list-group-item">
-                        
-                    <div class="row">
-                       <div class="col">
-                           Chicken
-                       </div>
-                       <div class="col text-end">
-                           <span class="oi bi bi-x-circle-fill" style="color:red"></span>
-                       </div>
-                   </div>
-                        
-                    </li>
-                <li class="list-group-item">
-                        
-                   <div class="row">
-                       <div class="col">
-                           Yogurt
-                       </div>
-                       <div class="col text-end">
-                           <span class="oi bi bi-x-circle-fill" style="color:red"></span>
-                       </div>
-                   </div>    
-                        
-                 </li>
-            </ul>
-              
-          </div> 
-
-          
-
-
-      </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col">
+                                        Chicken
+                                    </div>
+                                    <div class="col text-end">
+                                        <span class="oi bi bi-x-circle-fill" style="color:red"></span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col">
+                                        Yogurt
+                                    </div>
+                                    <div class="col text-end">
+                                        <span class="oi bi bi-x-circle-fill" style="color:red"></span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
-    
     <br />
     <br />
+    @if (recipes == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var recipe in recipes)
+            {
+                <div class="col-md-auto">
+                    <a style="text-decoration: none" href="/ViewRecipe">
+                        <CookingBuddy.Pages.search.components.RecipeCard src="https://www.recipetineats.com/wp-content/uploads/2018/04/Chicken-Tikka-Masala_0.jpg" recipe=@recipesArray[0] />
+                    </a>
+                </div>
+            }
+        </div>
+    }
+
+
     <div class="row">
         <div class="col-md-auto">
             <a style="text-decoration: none" href="/ViewRecipe">
@@ -156,13 +144,19 @@
             </a>
         </div>
     </div>
-
-    
-   
-
 </div>
 
 @code{
+
+    string Error = "";
+    List<RecipeModel> recipes = new List<RecipeModel>();
+    RecipeModel objRecipeModel = new RecipeModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        recipes = await RecipeService.GetRecipeAsync();
+    }
+
     public RecipeInformation[] recipesArray = new RecipeInformation[]
     {
         new RecipeInformation ( author : "Chef chi", title : "Chicken Tikka Masala Low calorie", calories : "300", difficulty : "Expert", price : "14.48", rating : "4.8", time : "30 mins" ),
@@ -170,6 +164,6 @@
 
     };
 
-   
-    
+
+
 }

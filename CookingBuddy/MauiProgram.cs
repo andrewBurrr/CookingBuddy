@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.Maui;
+using CookingBuddy.Data;
+using CookingBuddy.Services;
+
 namespace CookingBuddy;
 
 public static class MauiProgram
@@ -14,6 +17,15 @@ public static class MauiProgram
 			});
 
 		builder.Services.AddMauiBlazorWebView();
+
+		var dbPath =
+			Path.Combine(
+				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+				@"CookingBuddy.db");
+
+		builder.Services.AddSingleton<RecipeService>(
+			s => ActivatorUtilities.CreateInstance<RecipeService>(s, dbPath));
+
 		#if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
 		#endif
