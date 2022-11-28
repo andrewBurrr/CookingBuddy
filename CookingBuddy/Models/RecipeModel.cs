@@ -30,6 +30,7 @@ namespace CookingBuddy.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        public int Order { get; set; }
         public int RecipeId { get; set; }
     }
 
@@ -38,6 +39,7 @@ namespace CookingBuddy.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         public int StageId { get; set; }
+        public int Order { get; set; }
         public string Content { get; set; }
     }
 }

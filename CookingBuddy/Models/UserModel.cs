@@ -2,7 +2,7 @@
 using SQLite;
 namespace CookingBuddy.Models
 {
-    public class UserModel
+    public class User
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }

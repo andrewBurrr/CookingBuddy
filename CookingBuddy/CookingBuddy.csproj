@@ -31,6 +31,9 @@
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0-ios|AnyCPU'">
+      <CreatePackage>false</CreatePackage>
+    </PropertyGroup>
     <ItemGroup>
         <!-- App Icon -->
         <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -60,7 +63,6 @@
       <None Remove="Pages\home\components\" />
       <None Remove="Resources\Images\profile_picture_placeholder.jpg" />
       <None Remove="sqlite-net-pcl" />
-      <None Remove="Data\" />
       <None Remove="Pages\learn\components\" />
       <None Remove="BootstrapBlazor.BarCode" />
       <None Remove="BootstrapBlazor" />
@@ -84,7 +86,6 @@
       <Folder Include="Pages\RecipeViewLocal\models\" />
       <Folder Include="wwwroot\css\bootstrap-icons\" />
       <Folder Include="wwwroot\css\bootstrap-icons\fonts\" />
-      <Folder Include="Data\" />
       <Folder Include="Pages\learn\components\" />
       <Folder Include="Models\" />
       <Folder Include="Services\" />
