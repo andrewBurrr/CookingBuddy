@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.Maui;
-using CookingBuddy.Data;
 using CookingBuddy.Services;
 
 namespace CookingBuddy;
@@ -25,6 +24,8 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<RecipeService>(
 			s => ActivatorUtilities.CreateInstance<RecipeService>(s, dbPath));
+
+		builder.Services.AddSingleton<LessonService>();
 
 		#if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();

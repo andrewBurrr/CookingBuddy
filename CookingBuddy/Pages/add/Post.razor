@@ -1,4 +1,7 @@
 ﻿@page "/post"
+@using CookingBuddy.Models
+@using CookingBuddy.Services
+@inject RecipeService RecipeServiceInj
 
 <h1 class="text-center"></h1>
 
@@ -6,24 +9,24 @@
     <form>
         <div class="row mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" />
+            <input type="text" class="form-control" @bind="recipe.Title" id="title" />
         </div>
         <div class="row mb-3">
             <label for="formFile" class="form-label">Add Media</label>
-            <input class="form-control" type="file" id="mediaFile">
+            <input class="form-control" type="file" @bind="recipe.Media" id="mediaFile">
         </div>
         <div class="row mb-3">
             <label for="price" class="form-label">Price</label>
             <div class="input-group mb-3">
                 <span class="input-group-text">$</span>
-                <input type="text" class="form-control" id="price" />
+                <input type="text" class="form-control" @bind="recipe.Price" id="price" />
                 <span class="input-group-text">/Serving</span>
             </div>
         </div>
         <div class="row mb-3">
             <label for="yield" class="form-label">Yield</label>
             <div class="input-group mb-3">
-                <select class="form-select" id="yield">
+                <select class="form-select" @bind="recipe.Yield" id="yield">
                     <option selected>Choose...</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -42,7 +45,7 @@
         <div class="row mb-3">
             <label for="time" class="form-label">Time</label>
             <div class="input-group mb-3">
-                <input type="number" class="form-control" id="time" />
+                <input type="number" class="form-control" @bind="recipe.Time" id="time" />
                 <span class="input-group-text">Minutes</span>
             </div>
         </div>
@@ -143,7 +146,7 @@
         <br />
         <div class="btn-group d-flex">
             <a href="#" class="btn btn-danger flex-even">Save as draft</a>
-            <a href="#" class="btn btn-primary flex-even">Post</a>
+            <a href="#" class="btn btn-primary flex-even" @onclick="SaveRecipe">Post</a>
         </div>
     </form>
     <br />
@@ -159,6 +162,39 @@
 
     [Parameter]
     public string Src { get; set; }
+
+    public Recipe recipe = new Recipe();
+
+    public void AddRecipe() {
+        recipe = new Recipe();
+        recipe.Id = 0;
+    }
+
+    async Task SaveRecipe()
+    {
+        try
+        {
+            if (recipe.Id == 0)
+            {
+                Recipe newRecipe = new Recipe();
+                newRecipe.Title = recipe.Title;
+                newRecipe.Media = "https://i.ytimg.com/vi/ISGbUMaDC7w/hqdefault.jpg";
+                newRecipe.Price = recipe.Price;
+                newRecipe.Yield = recipe.Yield;
+                newRecipe.Time = recipe.Time;
+                var newRecipeObj = await RecipeServiceInj.CreateRecipeAsync(newRecipe);
+
+            }
+            else
+            {
+                await RecipeServiceInj.UpdateRecipeAsync(recipe);
+            }
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(exception.Message);
+        }
+    }
 }
 
 

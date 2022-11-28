@@ -1,7 +1,7 @@
 ﻿@page "/learn"
 @using CookingBuddy.Models
 @using CookingBuddy.Services
-@inject LessonService LessonService
+@inject LessonService LessonServiceInj
 
 @using CookingBuddy.Pages.search.model;
 
@@ -14,7 +14,7 @@
         {
             <div class="col-md-auto">
                 <a style="text-decoration: none" href="/learnView">
-                    <CookingBuddy.Pages.learn.components.Lesson src="https://c.stocksy.com/a/M5h000/z0/165624.jpg" author="Jay Balvin" title="Dice 101" rating="5.0" hasVideo=true />
+                    <CookingBuddy.Pages.learn.components.Lesson src=@lesson.Image author=@lesson.Author title=@lesson.Title rating=@lesson.Rating hasVideo=true />
                 </a>
             </div>
         }
@@ -29,11 +29,11 @@
 </div>
 
 @code {
-    private LessonModel[]? lessons;
-
+#nullable enable
+    private Lesson[]? lessons;
     protected override async Task OnInitializedAsync()
     {
-        lessons = await LessonService.GetLessonAsync();
+        lessons = await LessonServiceInj.GetLessonAsync();
     }
     public RecipeInformation[] recipesArray = new RecipeInformation[]
 {
