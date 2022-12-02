@@ -1,11 +1,13 @@
-﻿@page "/learnView"
+﻿@page "/LearnView/{Id:int}"
 
 
 @using CookingBuddy.Pages.LetsCook.model;
+<div class="container" style="padding-bottom: 10px; text-align: right"><a href="/learn" style="text-decoration: none; color: black"> <span class="oi bi bi-x-circle"></span> Cancel</a></div>
 <div class="container-fluid mt-auto flex-grow-1">
 
 
 <div class="row">
+    
     <div class="ratio ratio-21x9">
         @*<iframe src=@data.videourl title="YouTube video" allowfullscreen></iframe>*@
             <img src="https://www.simplyrecipes.com/thmb/xEfGmfePAyDjSGCAWQpsEWZE1nE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2009__01__cut-onion-in-half-f4026d694da947ae9c9534876719d638.jpg" />
@@ -15,6 +17,7 @@
 
 
 <div class="row">
+    
     <div class="tab-content" id="nav-tabContent">
         @for (var @item = 0; @item < @data.StepDescritpionPair.Length; @item++)
         {
@@ -51,7 +54,7 @@
         <div class="col bottom ">
             
             <button type="button" class="btn btn-dark">
-                Prev
+                @Id Prev
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                 </svg>
@@ -117,6 +120,9 @@
   </div>
 </div>
 @code {
+
+    [Parameter]
+    public int Id { get; set; }
     
     LetsCookModel data = new LetsCookModel("youtube.com/embed/h5gcJjOSDv4", new (string,string)[]{("Sauce", "Continue chopping the onions until you reach the end of the onion"),
     ("Grilling", "Grill steak on each side for 5 minutes, Add salt and pepper to taste, Add sauce,Remove steak from pan,Let cool for 5 mins"),
