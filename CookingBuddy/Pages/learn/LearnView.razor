@@ -1,4 +1,7 @@
 ﻿@page "/LearnView/{Id:int}"
+@using CookingBuddy.Models
+@using CookingBuddy.Services
+@inject LessonService LessonServiceInj
 
 
 @using CookingBuddy.Pages.LetsCook.model;
@@ -10,7 +13,7 @@
     
     <div class="ratio ratio-21x9">
         @*<iframe src=@data.videourl title="YouTube video" allowfullscreen></iframe>*@
-            <img src="https://www.simplyrecipes.com/thmb/xEfGmfePAyDjSGCAWQpsEWZE1nE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__simply_recipes__uploads__2009__01__cut-onion-in-half-f4026d694da947ae9c9534876719d638.jpg" />
+            <img src=@lesson[0].Image />
     </div>
 
 </div>
@@ -19,32 +22,36 @@
 <div class="row">
     
     <div class="tab-content" id="nav-tabContent">
-        @for (var @item = 0; @item < @data.StepDescritpionPair.Length; @item++)
+        @for (var @item = 0; @item < @lesson.Length; @item++)
         {
             if (item == 0)
             {
-                <div class="tab-pane fade show active" id="nav-@data.StepDescritpionPair[0].Item1" role="tabpanel" aria-labelledby="nav-@data.StepDescritpionPair[0].Item1-tab">
+                <div class="tab-pane fade show active">
                     <ul>
-                        @foreach (var @i in @data.StepDescritpionPair[0].Item2.Split(","))
+                        @foreach (var @i in @lesson)
                         {
-
-                            <li style="font-size:30px">@i</li>
+                                foreach (var instruction in i.Instructions)
+                                {
+                                    <li style="font-size:30px">@instruction</li>
+                                }
+                                
                         }
                     </ul>
                 </div>
             }
             else
             {
-                <div class="tab-pane fade" id="nav-@data.StepDescritpionPair[@item].Item1" role="tabpanel" aria-labelledby="nav-@data.StepDescritpionPair[@item].Item1-tab">
+                 <div class="tab-pane fade show active">
                     <ul>
-                        @foreach (var @i in @data.StepDescritpionPair[@item].Item2.Split(","))
+                        @foreach (var @i in @lesson)
                         {
 
-                            <li style="font-size:30px">@i</li>
+                            foreach (var instruction in i.Instructions)
+                                {
+                                    <li style="font-size:30px">@instruction</li>
+                                }
                         }
                     </ul>
-
-
                 </div>
             }
         }
@@ -54,7 +61,7 @@
         <div class="col bottom ">
             
             <button type="button" class="btn btn-dark">
-                @Id Prev
+                Prev
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                 </svg>
@@ -123,8 +130,19 @@
 
     [Parameter]
     public int Id { get; set; }
-    
-    LetsCookModel data = new LetsCookModel("youtube.com/embed/h5gcJjOSDv4", new (string,string)[]{("Sauce", "Continue chopping the onions until you reach the end of the onion"),
-    ("Grilling", "Grill steak on each side for 5 minutes, Add salt and pepper to taste, Add sauce,Remove steak from pan,Let cool for 5 mins"),
-    ("Serving", "Add garnish,Serve meal"),("Final-Step", "")});
+
+    //LetsCookModel data = new LetsCookModel("youtube.com/embed/h5gcJjOSDv4", new (string,string)[]{("Sauce", "Continue chopping the onions until you reach the end of the onion"),
+    //("Grilling", "Grill steak on each side for 5 minutes, Add salt and pepper to taste, Add sauce,Remove steak from pan,Let cool for 5 mins"),
+    //("Serving", "Add garnish,Serve meal"),("Final-Step", "")});
+
+#nullable enable
+    public Lesson[]? lesson;
+#nullable disable
+
+    protected override async Task OnInitializedAsync()
+    {
+        lesson = await LessonServiceInj.GetSpecificLessonAsync(Id);
+
+    }
+
 }

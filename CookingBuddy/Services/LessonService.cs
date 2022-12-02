@@ -41,8 +41,21 @@ namespace CookingBuddy.Services
 
         private static readonly List<string>[] Instructions = new List<string>[]
         {
-            new List<string>{ "prepare the ingredients for step 1", "mix the ingredients for step 2", "finish by doing the final step"},
-            new List<string>{ "do a thing", "do a different thing", "do last thing"}
+            new List<string>{ "Braising", "mix the ingredients for step 2", "finish by doing the final step"},
+            new List<string>{ "Boiling and simmering", "do a different thing", "do last thing"},
+            new List<string>{ "Sauteing", "do a different thing", "do last thing"},
+            new List<string>{ "Cooking with steam", "do a different thing", "do last thing"},
+            new List<string>{ "Grilling", "do a different thing", "do last thing"},
+            new List<string>{ "Marinating", "do a different thing", "do last thing"},
+            new List<string>{ "Intro to  curing and pickling", "do a different thing", "do last thing"},
+            new List<string>{ "Pan-Frying", "do a different thing", "do last thing"},
+            new List<string>{ "How to chop an onion", "do a different thing", "do last thing"},
+            new List<string>{ "Mastering basic knife skills", "do a different thing", "do last thing"},
+            new List<string>{ "How to knead dough", "do a different thing", "do last thing"},
+            new List<string>{ "Crushing garlic", "do a different thing", "do last thing"},
+            new List<string>{ "Staying safe in the kitchen", "do a different thing", "do last thing"},
+            new List<string>{ "How to rub flour and butter", "do a different thing", "do last thing"}
+
         };
 
 
@@ -61,20 +74,20 @@ namespace CookingBuddy.Services
             }).ToArray());
         }
 
-        public Lesson GetSpecificLessonAsync(int index)
+        public Task<Lesson[]> GetSpecificLessonAsync(int index)
         {
-            return new Lesson
+            return Task.FromResult(Enumerable.Range(0, 1).Select(i => new Lesson
             {
+                // create your data
                 Title = Titles[index],
                 Author = Authors[Random.Shared.Next(Authors.Length)],
                 Rating = Ratings[Random.Shared.Next(Ratings.Length)],
                 Image = Images[index],
-                Instructions = Instructions[Random.Shared.Next(Instructions.Length)]
-
-            };
-        
-
+                Instructions = Instructions[index]
+            }).ToArray());
         }
+
+       
     }
 }
 
