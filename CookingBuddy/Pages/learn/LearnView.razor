@@ -30,10 +30,7 @@
                     <ul>
                         @foreach (var @i in @lesson)
                         {
-                                foreach (var instruction in i.Instructions)
-                                {
-                                    <li style="font-size:30px">@instruction</li>
-                                }
+                                <li style="font-size:30px">@i.Instructions[currentInstruction]</li>
                                 
                         }
                     </ul>
@@ -46,10 +43,10 @@
                         @foreach (var @i in @lesson)
                         {
 
-                            foreach (var instruction in i.Instructions)
-                                {
-                                    <li style="font-size:30px">@instruction</li>
-                                }
+                            
+                            
+                                    <li style="font-size:30px">@i.Instructions[currentInstruction]</li>
+                            
                         }
                     </ul>
                 </div>
@@ -60,14 +57,14 @@
     <div class="row align-items-end mt-auto row-eq-height">
         <div class="col bottom ">
             
-            <button type="button" class="btn btn-dark">
+            <button type="button" class="btn btn-dark" @onclick="PrevInstruction" disabled=@(currentInstruction>0 ?false:true)>
                 Prev
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
                     <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                 </svg>
             </button>
         </div>
-        <div class="col bottom ">
+        <div class="col bottom " >
             <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#survey">
                 Finished
             </button>
@@ -117,7 +114,7 @@
         </div>
         <div class="col bottom ">
             
-            <button type="button" class="btn btn-dark">
+            <button type="button" class="btn btn-dark" @onclick="NextInstruction" disabled=@(currentInstruction<lesson[0].Instructions.Count-1 ?false:true)>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
                     <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                 </svg>
@@ -131,6 +128,10 @@
     [Parameter]
     public int Id { get; set; }
 
+    public int currentInstruction { get; set; } = 0;
+
+
+
     //LetsCookModel data = new LetsCookModel("youtube.com/embed/h5gcJjOSDv4", new (string,string)[]{("Sauce", "Continue chopping the onions until you reach the end of the onion"),
     //("Grilling", "Grill steak on each side for 5 minutes, Add salt and pepper to taste, Add sauce,Remove steak from pan,Let cool for 5 mins"),
     //("Serving", "Add garnish,Serve meal"),("Final-Step", "")});
@@ -143,6 +144,32 @@
     {
         lesson = await LessonServiceInj.GetSpecificLessonAsync(Id);
 
+    }
+
+    private void NextInstruction()
+    {
+
+        if (currentInstruction < lesson[0].Instructions.Count-1)
+        {
+            currentInstruction++;
+        }
+        else
+        {
+            currentInstruction = lesson[0].Instructions.Count - 1;
+        }
+    }
+
+    private void PrevInstruction()
+    {
+
+        if (currentInstruction > 0)
+        {
+            currentInstruction--;
+        }
+        else
+        {
+            currentInstruction = 0;
+        }
     }
 
 }
