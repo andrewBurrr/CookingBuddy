@@ -20,9 +20,9 @@
     }
 
         .nav-item ::deep a.active {
-            color: black;
+            /*color: dodgerblue;*/
         }
 
         .nav-item ::deep a:hover {
-            color: black;
+            color: dodgerblue;
         }
