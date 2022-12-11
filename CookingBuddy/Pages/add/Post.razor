@@ -90,70 +90,58 @@
                     </tr>
 
 
-        <!--==================================== START OF INPUT INGREDIENT BUTTON ========================================-->
+                    <!--==================================== START OF INPUT INGREDIENT BUTTON ========================================-->
+                    @foreach (var ing in ingredients)
+                    {
 
-                @foreach (var ing in ingredients)
-                {
+                        <tr @key="@ing">
+                            <th scope="row">@ing</th>
+                            <td><input class="form-control" type="text" placeholder="qty"></td>
+                            <td>
+                                <div class="input-group mb-3">
+                                    <select placeholder="unit" class="form-select">
+                                        <option>--</option>
+                                        <option>tsp</option>
+                                        <option>tbsp</option>
+                                        <option>cups</option>
+                                        <option>pinch</option>
+                                        <option>mL</option>
+                                        <option>L</option>
+                                        <option>slices</option>
+                                        <option>pound</option>
+                                    </select>
+                                </div>
 
-                                <tr @key="@ing"> 
-                                    <th scope="row">@ing</th>
-                                    <td><input class="form-control" type="text" placeholder="qty"></td>
-                                    <td>
-                                        <div class="input-group mb-3">
-                                            <select placeholder="unit" class="form-select">
-                                                <option>--</option>
-                                                <option>tsp</option>
-                                                <option>tbsp</option>
-                                                <option>cups</option>
-                                                <option>pinch</option>
-                                                <option>mL</option>
-                                                <option>L</option>
-                                                <option>slices</option>
-                                                <option>pound</option>
-                                            </select>
-                                        </div>
-
-                                    </td>
-                                    <td><input class="form-control" type="text" placeholder="ing" list="list.Ingredient"></td>
+                            </td>
+                            <td><input class="form-control" type="text" placeholder="ing" list="list.Ingredient"></td>
                             <td><span class="btn btn-danger" @onclick="@(()=>ingredients.Remove(ing))"><i class="bi bi-trash"></i></span></td>
-                                </tr>
+                        </tr>
+                    }
 
-                    
-                }
-
-
-           
-
-            <!--END OF TABLE -->
-                            </tbody>
-
-                                </table>
+                </tbody>
+            </table>
         </div>
 
-          
-                <a class="btn btn-primary" @onclick="@IngredientAdd">
-                Add Ingredient
-                </a>
+        <!--Button for adding ingredients -->
 
-                @if (ingredientInput.Length > 0)
-                {
+        <a class="btn btn-primary" @onclick="@IngredientAdd">Add Ingredient</a>
 
-                    <i @onclick="ClearIngredient" class="bi bi-x-lg position-absolute"
-                   style="
-                                  right: 10px;
-                                  cursor: pointer;
-                                  z-index: 100;">
-                    </i>
-                }
+        @if (ingredientInput.Length > 0)
+        {
 
-       
-
-
+            <i @onclick="ClearIngredient" class="bi bi-x-lg position-absolute"
+           style="
+                              right: 10px;
+                              cursor: pointer;
+                              z-index: 100;">
+            </i>
+        }
 
 
         <!--==================================== END OF INPUT INGREDIENT BUTTON ========================================-->
 
 
+        <!-- ====================================== START OF ADD STEPS ===========================================================  -->
 
         <br />
         <br />
@@ -175,14 +163,45 @@
                     </li>
                 </ul>
             </div>
+
+<!--Start of stage 1-->
+
             <div class="card-body tab-content">
                 <div class="tab-pane active" id="stage1">
+                    
                     <div class="card mb-3">
                         <div class="card-body">
-                            <h4 class="card-title">Step 1</h4>
+                            <h4 class="card-title">Step 1
+
+                            </h4>
                             <textarea class="form-control" id="instructionArea1" rows="3"></textarea>
                         </div>
                     </div>
+
+                    <!--Begin adding steps----->
+
+                    @foreach (var stp in steps)
+                    {
+
+                           
+                                <div class="card mb-3" id="stage3" @key="@stp">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Step @stp
+
+                                            <td style="float: right"><span class="btn btn-danger" @onclick="@(()=>steps.Remove(stp))"><i class="bi-x-lg"></i></span></td>
+                                        </h4>
+                                        <textarea class="form-control" id="instructionArea1" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            
+
+                        
+
+                    }
+
+
+<!--End of stage 1-->
+
                 </div>
                 <div class="tab-pane" id="stage2">
                     <div class="card mb-3">
@@ -200,6 +219,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane" id="stage1">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h4 class="card-title">Step 2</h4>
+                            <textarea class="form-control" id="instructionArea1" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
                 <div class="tab-pane" id="addstage">
                     <div class="card mb-3">
                         <div class="card-body">
@@ -208,13 +239,32 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary">Add Step</button>
+
+
+
+
+                <!--Button for adding ingredients -->
+
+                <a class="btn btn-primary" @onclick="@StepAdd">Add Step</a>
+
+                @if (stepInput.Length > 0)
+                {
+
+                    <i @onclick="ClearSteps" class="bi bi-x-lg position-absolute"
+                   style="
+                              right: 10px;
+                              cursor: pointer;
+                              z-index: 100;">
+                    </i>
+                }
+
+
             </div>
         </div>
         <br />
 
 
-
+        <!-- ====================================== END OF ADD STEPS ===========================================================  -->
 
 
 
@@ -230,9 +280,7 @@
 
 </div>
 
-
-
-
+<!-- ====================================== CODE ===========================================================  -->
 @code {
     [Parameter]
     public string Title { get; set; }
@@ -285,7 +333,7 @@
     <div>
     @for (var @item = 0; @item < @titleData.titleList.Length; @item++)
         {
-            <option>@titleData.titleList[item]</option>
+                <option>@titleData.titleList[item]</option>
         }
     </div>
 </datalist>
@@ -295,7 +343,7 @@
     <div>
         @for (var @item = 0; @item < @ingredientsData.titleList.Length; @item++)
         {
-            <option>@ingredientsData.titleList[item]</option>
+                <option>@ingredientsData.titleList[item]</option>
         }
     </div>
 </datalist>
@@ -305,17 +353,17 @@
     <div>
         @for (var @item = 0; @item < @unitsData.titleList.Length; @item++)
         {
-            <option>@unitsData.titleList[item]</option>
+                <option>@unitsData.titleList[item]</option>
         }
      </div>
 </datalist>
 
 
 
-
-
+<!-- ====================================== CODE ===========================================================  -->
 @code {
     private static ArrayList ingredients = new ArrayList();
+    private static ArrayList steps = new ArrayList();
 
 
     //List for recipe titles
@@ -341,10 +389,18 @@
     }
 
     static int inputValue = 2;
+    static int inputValue2 = 2;
+
 
     public static string ingredientInput { get; set; } = inputValue.ToString();
+    public static string stepInput { get; set; } = inputValue2.ToString();
 
     private String getIngredientID()
+    {
+        return inputValue.ToString();
+    }
+
+    private String getStepID()
     {
         return inputValue.ToString();
     }
@@ -362,9 +418,29 @@
         ingredientInput = inputValue.ToString();
     }
 
+    private void StepAdd()
+    {
+        if (stepInput.Length > 0)
+        {
+            if (!steps.Contains(stepInput))
+            {
+                steps.Add(stepInput);
+                inputValue2++;
+            }
+        }
+        stepInput = inputValue2.ToString();
+    }
+
+
     private void ClearIngredient()
     {
         ingredientInput = "";
+
+    }
+
+    private void ClearSteps()
+    {
+        stepInput = "";
 
     }
 
@@ -373,6 +449,13 @@
         inputValue = ingredients.Count;
         ingredients.RemoveAt(index);
     }
+
+    private void RemoveSteps(int index)
+    {
+        inputValue2 = steps.Count;
+        steps.RemoveAt(index);
+    }
+
 
 
 
