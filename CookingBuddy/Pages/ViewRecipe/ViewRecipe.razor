@@ -1,9 +1,18 @@
-﻿@page "/ViewRecipe"
+﻿@using CookingBuddy.Pages.ViewRecipe.model;
+@using CookingBuddy.Models
+@using CookingBuddy.Services
+@inject RecipeService RecipeServiceInj
+@page "/ViewRecipe"
+@page "/ViewRecipe/{Id:int}"
 
-
-@using CookingBuddy.Pages.ViewRecipe.model;
 
 <div class="container-fluid  overflow-hidden">
+    @if (recipes == null)
+    {
+        <p><em>Loading...</em></p>
+    }else{
+
+    
     <div class="container-fluid border border-top border-bottom">
         <CookingBuddy.Pages.ViewRecipe.components.RecipeTitleBar recipe=@recipeTitle></CookingBuddy.Pages.ViewRecipe.components.RecipeTitleBar>
     </div>
@@ -13,10 +22,41 @@
     <div class="container-fluid border border-top border-bottom">
         <a href="/LetsCook" class="btn btn-info" role="button">Lets Cook</a>
     </div>
+    }
 </div>
 
 @code {
-    RecipeTitleBarModel recipeTitle = new RecipeTitleBarModel("https://makeyourmeals.com/wp-content/uploads/2019/06/featured-grilled-steak-735x490.jpg.webp"
-                , "Grilled Steak");
-    RecipeBodyModel recipeBody = new RecipeBodyModel("Cooking Buddy", "easy", "3.5", "30 mins", "500 cal", "Perfectly Grilled Steak", "Spatula","1lbs Steak,1 tbsp Salt,2 tbsp Butter,Pepper to taste,Pasta 500grams,Onions 250grams,2 Tomatos","50$","3");
+    [Parameter]
+    public int Id { get; set; }
+    List<Recipe> recipes;
+    public RecipeBodyModel recipeBody;
+    public RecipeTitleBarModel recipeTitle;
+    protected override async Task OnInitializedAsync()
+    {
+        bool found = false;
+        System.Diagnostics.Debug.WriteLine("Called in view");
+        recipes = await RecipeServiceInj.GetRecipeAsync();
+        foreach(var rec in recipes){
+            if(rec.Id == Id){
+                System.Diagnostics.Debug.WriteLine("Found recipe ");
+                found = true;
+               recipeTitle = new RecipeTitleBarModel(rec.Media
+                            , rec.Title);
+               recipeBody = new RecipeBodyModel(rec.Author, rec.Difficulty, rec.Rating,
+                    rec.Time.ToString() + " mins", rec.Calories + " cals", rec.Title, "Spatula", "1lbs Steak,1 tbsp Salt,2 tbsp Butter,Pepper to taste,Pasta 500grams,Onions 250grams,2 Tomatos", rec.Price.ToString() + "$", rec.Yield.ToString());
+            }
+           
+        }
+        if(!found){
+           recipeTitle = new RecipeTitleBarModel("https://makeyourmeals.com/wp-content/uploads/2019/06/featured-grilled-steak-735x490.jpg.webp"
+                        , "Grilled Steak");
+            recipeBody = new RecipeBodyModel("Cooking Buddy", "easy", "3.5", "30 mins", "500 cal", "Perfectly Grilled Steak", "Spatula","1lbs Steak,1 tbsp Salt,2 tbsp Butter,Pepper to taste,Pasta 500grams,Onions 250grams,2 Tomatos","50$","3");
+        }
+        System.Diagnostics.Debug.WriteLine("returned in view");
+        
+
+    }
+
+
+    
 }

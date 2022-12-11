@@ -1,5 +1,6 @@
 @page "/searchResult"
 @using CookingBuddy.Models
+@using CookingBuddy.Pages.ViewRecipe.model
 @using CookingBuddy.Services
 @inject RecipeService RecipeServiceInj
 
@@ -120,11 +121,14 @@
     else
     {
         <div class="row">
-            @foreach (var recipe in recipes)
+            @foreach (var rec in recipes)
             {
+                RecipeInformation r = new RecipeInformation(author: rec.Author, title: rec.Title, calories: rec.Calories, difficulty: rec.Difficulty, price: rec.Price.ToString(), rating: rec.Rating, time: rec.Time.ToString());
+                String url_with_param = "/ViewRecipe/" + rec.Id;
+                System.Diagnostics.Debug.WriteLine("Url is: " + url_with_param);
                 <div class="col-md-auto">
-                    <a style="text-decoration: none" href="/ViewRecipe">
-                        <CookingBuddy.Pages.search.components.RecipeCard src="https://www.recipetineats.com/wp-content/uploads/2018/04/Chicken-Tikka-Masala_0.jpg" recipe=@recipesArray[0] />
+                    <a style="text-decoration: none" href=@url_with_param>
+                        <CookingBuddy.Pages.search.components.RecipeCard src=@rec.Media recipe=@r />
                     </a>
                 </div>
             }
@@ -154,7 +158,11 @@
 
     protected override async Task OnInitializedAsync()
     {
+        System.Diagnostics.Debug.WriteLine("Called");
         recipes = await RecipeServiceInj.GetRecipeAsync();
+        System.Diagnostics.Debug.WriteLine("returned");
+        System.Diagnostics.Debug.WriteLine("recipes size is "+ recipes.Count() );
+
     }
 
     public RecipeInformation[] recipesArray = new RecipeInformation[]

@@ -7,8 +7,12 @@ namespace CookingBuddy.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
+        public string Author { get; set; }
+        public string Rating { get; set; }
+        public string Calories { get; set; }
         public string Title { get; set; }
         public string Media { get; set; }
+        public string Difficulty { get; set; }
         public float Price { get; set; }
         public int Yield { get; set; }
         public int Time { get; set; }
