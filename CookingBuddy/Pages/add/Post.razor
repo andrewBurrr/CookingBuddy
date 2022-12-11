@@ -4,6 +4,7 @@
 @using CookingBuddy.Pages.add.data;
 @inject RecipeService RecipeServiceInj
 @using CookingBuddy.Pages.add;
+@using System.Collections;
 
 <h1 class="text-center"></h1>
 
@@ -51,6 +52,7 @@
                 <span class="input-group-text">Minutes</span>
             </div>
         </div>
+
         <h4 class="text-center">Ingredients</h4>
         <div class="table-responsive">
             <table class="table">
@@ -70,28 +72,6 @@
                         <td>
                             <div class="input-group mb-3">
                                 <select placeholder="unit" class="form-select">
-                                <option>--</option>
-                                <option>tsp</option>
-                                <option>tbsp</option>
-                                <option>cups</option>
-                                <option>pinch</option>
-                                <option>mL</option>
-                                <option>L</option>
-                                <option>slices</option>
-                                <option>pound</option>
-                                </select>
-                            </div>
-
-                        </td>
-                        <td><input class="form-control" type="text" placeholder="ing" list="list.Ingredient"></td>
-                        <td><button class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td><input class="form-control" type="text" placeholder="qty"></td>
-                        <td>
-                            <div class="input-group mb-3">
-                                <select placeholder="unit" class="form-select">
                                     <option>--</option>
                                     <option>tsp</option>
                                     <option>tbsp</option>
@@ -103,36 +83,78 @@
                                     <option>pound</option>
                                 </select>
                             </div>
-                       </td>
 
-                        <td><input class="form-control" type="text" placeholder="ing" list="list.Ingredient"></td>
-                        <td><button class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td><input class="form-control" type="text" placeholder="qty"></td>
-                        <td>                            
-                            <div class="input-group mb-3">
-                                <select placeholder="unit" class="form-select">
-                                <option>--</option>
-                                <option>tsp</option>
-                                <option>tbsp</option>
-                                <option>cups</option>
-                                <option>pinch</option>
-                                <option>mL</option>
-                                <option>L</option>
-                                <option>slices</option>
-                                <option>pound</option>
-                                </select>
-                            </div>
                         </td>
                         <td><input class="form-control" type="text" placeholder="ing" list="list.Ingredient"></td>
                         <td><button class="btn btn-danger"><i class="bi bi-trash"></i></button></td>
                     </tr>
-                </tbody>
-            </table>
+
+
+        <!--==================================== START OF INPUT INGREDIENT BUTTON ========================================-->
+
+                @foreach (var ing in ingredients)
+                {
+
+                                <tr @key="@ing"> 
+                                    <th scope="row">@ing</th>
+                                    <td><input class="form-control" type="text" placeholder="qty"></td>
+                                    <td>
+                                        <div class="input-group mb-3">
+                                            <select placeholder="unit" class="form-select">
+                                                <option>--</option>
+                                                <option>tsp</option>
+                                                <option>tbsp</option>
+                                                <option>cups</option>
+                                                <option>pinch</option>
+                                                <option>mL</option>
+                                                <option>L</option>
+                                                <option>slices</option>
+                                                <option>pound</option>
+                                            </select>
+                                        </div>
+
+                                    </td>
+                                    <td><input class="form-control" type="text" placeholder="ing" list="list.Ingredient"></td>
+                            <td><span class="btn btn-danger" @onclick="@(()=>ingredients.Remove(ing))"><i class="bi bi-trash"></i></span></td>
+                                </tr>
+
+                    
+                }
+
+
+           
+
+            <!--END OF TABLE -->
+                            </tbody>
+
+                                </table>
         </div>
-        <a class="btn btn-primary">Add Ingredient</a>
+
+          
+                <a class="btn btn-primary" @onclick="@IngredientAdd">
+                Add Ingredient
+                </a>
+
+                @if (ingredientInput.Length > 0)
+                {
+
+                    <i @onclick="ClearIngredient" class="bi bi-x-lg position-absolute"
+                   style="
+                                  right: 10px;
+                                  cursor: pointer;
+                                  z-index: 100;">
+                    </i>
+                }
+
+       
+
+
+
+
+        <!--==================================== END OF INPUT INGREDIENT BUTTON ========================================-->
+
+
+
         <br />
         <br />
         <div class="card">
@@ -190,6 +212,12 @@
             </div>
         </div>
         <br />
+
+
+
+
+
+
         <div class="btn-group d-flex">
             <a href="#" class="btn btn-danger flex-even">Save as draft</a>
             <a href="#" class="btn btn-primary flex-even" @onclick="SaveRecipe">Post</a>
@@ -197,7 +225,13 @@
     </form>
     <br />
     <br />
+
+
+
 </div>
+
+
+
 
 @code {
     [Parameter]
@@ -211,10 +245,12 @@
 
     public Recipe recipe = new Recipe();
 
-    public void AddRecipe() {
+    public void AddRecipe()
+    {
         recipe = new Recipe();
         recipe.Id = 0;
     }
+
 
     async Task SaveRecipe()
     {
@@ -247,27 +283,30 @@
 
 <datalist id="list.Title"
     <div>
-    @for (var @item = 0; @item < @titleData.titleList.Length; @item++){
-        <option>@titleData.titleList[item]</option>
-    }
+    @for (var @item = 0; @item < @titleData.titleList.Length; @item++)
+        {
+            <option>@titleData.titleList[item]</option>
+        }
     </div>
 </datalist>
 
 
 <datalist id="list.Ingredient"
     <div>
-    @for (var @item = 0; @item < @ingredientsData.titleList.Length; @item++){
-        <option>@ingredientsData.titleList[item]</option>
-    }
+        @for (var @item = 0; @item < @ingredientsData.titleList.Length; @item++)
+        {
+            <option>@ingredientsData.titleList[item]</option>
+        }
     </div>
 </datalist>
 
 
 <datalist id="list.Units"
     <div>
-     @for (var @item = 0; @item < @unitsData.titleList.Length; @item++){
-        <option>@unitsData.titleList[item]</option>
-     }
+        @for (var @item = 0; @item < @unitsData.titleList.Length; @item++)
+        {
+            <option>@unitsData.titleList[item]</option>
+        }
      </div>
 </datalist>
 
@@ -276,19 +315,65 @@
 
 
 @code {
+    private static ArrayList ingredients = new ArrayList();
 
 
     //List for recipe titles
     dataList titleData = new dataList(new String[]{"Alfredo Chicken", "Apple Crumble Pie", "Banana Bread",
-                                            "Beef Stew", "Butter Chicken", "Chicken Tikka Masala", "Chicken Stew", 
-                                            "Chili", "Deviled Eggs", "Fish Stew", "French Toast", "Lemon Meringue Pie", 
+                                            "Beef Stew", "Butter Chicken", "Chicken Tikka Masala", "Chicken Stew",
+                                            "Chili", "Deviled Eggs", "Fish Stew", "French Toast", "Lemon Meringue Pie",
                                             "Mashed Potatoes", "Pancakes", "Shepherd's Pie"});
 
     //List for ingredients
-    dataList ingredientsData = new dataList(new String[]{"Sugar", "Salt", "Butter", "Cheese", "Onion",
-                                            "Margarine", "Egg", "Flour", "Milk", "Parsley", "Paprika", "Tomato", "Garlic"});
+    dataList ingredientsData = new dataList(new String[]{"Sugar", "Salt", "Butter", "Cheese", "Onion", "Lettuce", "Cucumber",
+                                            "Margarine", "Egg", "Flour", "Milk", "Parsley", "Paprika", "Tomato", "Garlic",
+                                            "Potato", "Black Pepper", "Carrot"});
 
     //List for units
     dataList unitsData = new dataList(new String[] { "tsp", "tbsp", "cups", "pinch", "mL", "L", "sliced" });
+
+
+    private List<dataList> lines = new List<dataList>();
+    private async Task removeRow(int linenumber)
+    {
+        lines = lines.Where(u => lines.IndexOf(u) != linenumber).ToList();
+
+    }
+
+    static int inputValue = 2;
+
+    public static string ingredientInput { get; set; } = inputValue.ToString();
+
+    private String getIngredientID()
+    {
+        return inputValue.ToString();
+    }
+
+    private void IngredientAdd()
+    {
+        if (ingredientInput.Length > 0)
+        {
+            if (!ingredients.Contains(ingredientInput))
+            {
+                ingredients.Add(ingredientInput);
+                inputValue++;
+            }
+        }
+        ingredientInput = inputValue.ToString();
+    }
+
+    private void ClearIngredient()
+    {
+        ingredientInput = "";
+
+    }
+
+    private void RemoveIngredient(int index)
+    {
+        inputValue = ingredients.Count;
+        ingredients.RemoveAt(index);
+    }
+
+
 
 }
