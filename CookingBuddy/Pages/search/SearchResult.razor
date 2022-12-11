@@ -113,11 +113,44 @@
     </div>
     <br />
     <br />
-    <CookingBuddy.Pages.search.components.RecipeCard src="https://www.recipetineats.com/wp-content/uploads/2018/04/Chicken-Tikka-Masala_0.jpg" recipe=@recipesArray[0] />
-    <CookingBuddy.Pages.search.components.RecipeCard src="https://www.desiblitz.com/wp-content/uploads/2017/06/history-of-chicken-tikka-masala-2.png" recipe=@recipesArray[1] />
+    @if (recipes == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var recipe in recipes)
+            {
+                <div class="col-md-auto">
+                    <a style="text-decoration: none" href="/ViewRecipe">
+                        <CookingBuddy.Pages.search.components.RecipeCard src="https://www.recipetineats.com/wp-content/uploads/2018/04/Chicken-Tikka-Masala_0.jpg" recipe=@recipesArray[0] />
+                    </a>
+                </div>
+            }
+        </div>
+    }
 
-    
-   
+
+    @*<div class="row">
+        <div class="col-md-auto">
+            <a style="text-decoration: none" href="/ViewRecipe">
+                <CookingBuddy.Pages.search.components.RecipeCard src="https://www.recipetineats.com/wp-content/uploads/2018/04/Chicken-Tikka-Masala_0.jpg" recipe=@recipesArray[0] />
+            </a>
+        </div>
+        <div class="col-md-auto">
+            <a style="text-decoration: none" href="/ViewRecipe">
+                <CookingBuddy.Pages.search.components.RecipeCard src="https://www.desiblitz.com/wp-content/uploads/2017/06/history-of-chicken-tikka-masala-2.png" recipe=@recipesArray[1] />
+            </a>
+        </div>
+    </div>*@
+</div>
+
+@code{
+
+    string Error = "";
+    List<Recipe> recipes = new List<Recipe>();
+    Recipe objRecipe = new Recipe();
 
     protected override async Task OnInitializedAsync()
     {
