@@ -7,18 +7,48 @@
 
 <h1 class="text-center">Learn</h1>
 <div class="container justify-content-around">
-    <input class="form-control d-flex w-100 justify-content-center" type="text" placeholder="Search..." aria-label="default input example">
+    <div class="container" style="padding: 0">
+        <div style=" width: 100%" class="input-group position-relative d-inline-flex align-items-center">
+            <input value="@search" @onchange="@SearchChanged" class="form-control d-flex w-100 justify-content-center" placeholder="Search..." aria-label="default input example" />
+        
+    @if (search.Length>0){
+
+            <i @onclick="ClearSearch" class="bi bi-x-lg position-absolute" 
+            style="
+              right: 10px;
+              cursor: pointer;
+              z-index: 100;">
+            </i>
+    }
+        </div>
+        
+       
+    </div>
+    
     <br />
     <div class="row">
         @foreach (var lesson in lessons)
         {
-            <div class="col-md-auto">
-                <a style="text-decoration: none" href="/learnView">
+            if (lesson.Title.ToLower().Contains(search.ToLower()))
+            {
+                searchSize++;
+                var index =Array.IndexOf(lessons, lesson);
+                <div class="col-md-auto">
+                    <a style="text-decoration: none" href="/LearnView/@index">
                     <CookingBuddy.Pages.learn.components.Lesson src=@lesson.Image author=@lesson.Author title=@lesson.Title rating=@lesson.Rating hasVideo=true />
                 </a>
             </div>
+            }
+            
         }
-        
+        @if (searchSize==0)
+        {
+            <div class="container" style="text-align: center">
+                <h3>No Results</h3>
+                Try a new search
+            </div>
+        }
+
         @*<div class="col-md-auto">
             <CookingBuddy.Pages.learn.components.Lesson src="https://res.cloudinary.com/bunch-media-library/image/upload/v1575061943/articles/ro9zhhmrewviaw0ewooo.jpg" author="Greg Roy" title="Kitchen Tools" rating="3.9" hasVideo=false />
         </div>
@@ -29,8 +59,14 @@
 </div>
 
 @code {
-#nullable enable
+    #nullable enable
     private Lesson[]? lessons;
+#nullable disable
+
+    private int searchSize = 0;
+    public static string search { get; set; } = "";
+
+
     protected override async Task OnInitializedAsync()
     {
         lessons = await LessonServiceInj.GetLessonAsync();
@@ -41,6 +77,25 @@
         new RecipeInformation ( author : "Vanity", title : "Sourdough Bread", calories : "650", difficulty : "Home cook", price : "14.00", rating : "4.3", time : "2 hrs" )
 
         };
+    private void SearchChanged(ChangeEventArgs obj)
+    {
+        searchSize = 0;
+        search = obj.Value.ToString();
+
+        //lessons = lessons.Where(l => l.Title.ToLower().Contains(search.ToLower())).ToArray();
+        //foreach (var lesson in lessons)
+        //{
+        //    Console.WriteLine(lesson.ToString());
+        //}
+        //StateHasChanged();
+    }
+
+    private void ClearSearch()
+    {
+        search = "";
+
+    }
+
 
 
 
