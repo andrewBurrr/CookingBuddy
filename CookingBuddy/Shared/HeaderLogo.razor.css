@@ -1,4 +1,34 @@
-﻿.top-row {
+﻿.oi {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: central;
+    top: -2px;
+}
+
+.nav-item {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+    .nav-item ::deep a {
+        color: #808080;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+        .nav-item ::deep a.active {
+            /*color: dodgerblue;*/
+        }
+
+        .nav-item ::deep a:hover {
+            color: dodgerblue;
+        }
+
+
+.top-row {
     height: 3.5rem;
     background-color: #f7f7f7;
     border-bottom: 1px solid #d6d5d5;
@@ -14,4 +44,37 @@
 
 .navbar-brand {
     font-size: 1.1rem;
+}
+
+.xyz {
+    background-size: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.btn-circle.btn-sm {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    font-size: 8px;
+    text-align: center;
+}
+
+.btn-circle.btn-md {
+    width: 50px;
+    height: 50px;
+    padding: 7px 10px;
+    border-radius: 25px;
+    font-size: 10px;
+    text-align: center;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 12px;
+    text-align: center;
 }

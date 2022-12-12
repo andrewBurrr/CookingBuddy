@@ -1,23 +1,31 @@
 ﻿@page "/register"
 
+@using System.ComponentModel.DataAnnotations;
+@using CookingBuddy.Models;
+@using CookingBuddy.Views;
+@using CookingBuddy.Services;
+@inject UserService UserServiceInj;
+
 <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
             <div class="card shadow-2-strong" style="border-radius: 1rem;">
                 <div class="card-body p-5 text-center">
                     <h1 class="mb-5">Register</h1>
-                    <form>
+                    <EditForm Model="registerView" OnValidSubmit="FormSubmitted">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
                         <!-- 2 column grid layout with text inputs for the first and last names -->
                         <div class="row">
                             <div class="col-md-6 mb-4">
                                 <div class="form-floating">
-                                    <input type="text" id="form3Example1" class="form-control" />
+                                    <input type="text" @bind-value="registerView.FirstName" id="form3Example1" class="form-control" />
                                     <label class="form-label" for="form3Example1">First name</label>
                                 </div>
                             </div>
                             <div class="col-md-6 mb-4">
                                 <div class="form-floating">
-                                    <input type="text" id="form3Example2" class="form-control" />
+                                    <input type="text" @bind-value="registerView.LastName" id="form3Example2" class="form-control" />
                                     <label class="form-label" for="form3Example2">Last name</label>
                                 </div>
                             </div>
@@ -25,13 +33,13 @@
 
                         <!-- Email input -->
                         <div class="form-floating mb-4">
-                            <input type="email" id="form3Example3" class="form-control" />
+                            <input type="email" @bind-value="registerView.Email" id="form3Example3" class="form-control" />
                             <label class="form-label" for="form3Example3">Email address</label>
                         </div>
 
                         <!-- Password input -->
                         <div class="form-floating mb-4">
-                            <input type="password" id="form3Example4" class="form-control" />
+                            <input type="password" @bind-value="registerView.Password" id="form3Example4" class="form-control" />
                             <label class="form-label" for="form3Example4">Password</label>
                         </div>
 
@@ -63,9 +71,19 @@
                                 <i class="bi bi-github"></i>
                             </button>
                         </div>
-                    </form>
+                    </EditForm>
                 </div>
             </div>
         </div>
     </div>
-</div>                
+</div>
+
+@code {
+    RegisterView registerView = new RegisterView();
+
+    public async void FormSubmitted()
+    {
+        await UserServiceInj.CreateUserAsync(registerView);
+    }
+}   
+        

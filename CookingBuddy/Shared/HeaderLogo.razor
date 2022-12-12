@@ -1,10 +1,40 @@
-﻿<nav class="navbar navbar-light bg-light navbar-expand" style="position: fixed; width: 100%; z-index: 1">
+﻿@using CookingBuddy.Models
+@using CookingBuddy.Services
+@inject UserService UserServiceInj 
+
+<nav class="navbar navbar-light bg-light navbar-expand" style="position: fixed; width: 100%; z-index: 1">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">
+        <a onclick="@Test">
             <h1 style="font-family: Brush Script MT, cursive">Cooking Buddy</h1>
         </a>
-        <a class="btn btn-outline-success" role="button" href="/settings">
-            Login/Register
-        </a>
+        @if (UserService.user == null)
+        {
+            <a class="btn btn-outline-success" role="button" href="/login">
+                Login/Register
+            </a>
+        }
+        else
+        {
+            <NavLink class="nav-link text-center" href="/notifications">
+                <span class="oi fas fa-bell"></span>
+            </NavLink>
+            <NavLink class="btn btn-success btn-circle btn-sm" href="/settings">
+                @UserService.user.UserName.Substring(0, 1)
+            </NavLink>
+        }
+
     </div>
 </nav>
+
+@code {
+
+    private void Test()
+    {
+        Console.WriteLine($"Active User - Taskbar - {UserService.user}");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        bool finished = await UserServiceInj.GetUsersAsync();
+    }
+}

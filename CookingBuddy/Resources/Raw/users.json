@@ -1,0 +1,42 @@
+﻿[
+  {
+    "UserName": "Andrew Burton",
+    "Email": "andrew.burton@ucalgary.ca",
+    "Password": "genius",
+    "Image": null,
+    "IsMute": false,
+    "Units": null
+  },
+  {
+    "UserName": "Justin Chua",
+    "Email": "justin.chua@ucalgary.ca",
+    "Password": "dummy",
+    "Image": null,
+    "IsMute": false,
+    "Units": null
+  },
+  {
+    "UserName": "Aaron Gao",
+    "Email": "aaron.gao1@ucalgary.ca",
+    "Password": "dummy",
+    "Image": null,
+    "IsMute": false,
+    "Units": null
+  },
+  {
+    "UserName": "Kareem Abdelaty",
+    "Email": "kareem.abdelaty@ucalgary.ca",
+    "Password": "dummy",
+    "Image": null,
+    "IsMute": false,
+    "Units": null
+  },
+  {
+    "UserName": "Umar Hassan",
+    "Email": "umar.hassan@ucalgary.ca",
+    "Password": "dummy",
+    "Image": null,
+    "IsMute": false,
+    "Units": null
+  }
+]

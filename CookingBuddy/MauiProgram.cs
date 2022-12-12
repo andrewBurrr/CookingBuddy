@@ -25,6 +25,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<RecipeService>(
 			s => ActivatorUtilities.CreateInstance<RecipeService>(s, dbPath));
 
+		builder.Services.AddSingleton<UserService>();
 		builder.Services.AddSingleton<LessonService>();
 
 		#if DEBUG
