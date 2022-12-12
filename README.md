@@ -15,3 +15,8 @@ experience - in the sense that the application should be usable by individuals o
 technology and the art of cooking. Relating to this point, resources should be available to educate users on the
 foundational knowledge needed for cooking-related tasks. Following the completion of a meal, users should have the
 option to save these recipes for future use, or leave feedback on what they liked or disliked about the dish
+
+## How to run the code
+In the commandline, of the project type: dotnet build -t:Run -f net6.0-android 
+
+You would also have to populate the Database by adding recipes manually to it through the post page
