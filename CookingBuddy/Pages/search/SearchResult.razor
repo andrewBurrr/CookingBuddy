@@ -2,6 +2,7 @@
 @using CookingBuddy.Models
 @using CookingBuddy.Pages.ViewRecipe.model
 @using CookingBuddy.Services
+@using System.Collections;
 @inject RecipeService RecipeServiceInj
 
 @using CookingBuddy.Pages.search.model;
@@ -17,95 +18,109 @@
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <div class="container" style="padding-bottom:10px">
+                    <div class="container form-check form-switch" style="padding-bottom:10px">
                         <label class="form-check-label" for="flexCheckDefault">
-                            Total time(mins)
+                            Total time(mins): @if(timeChecked){@timeFilter}
                         </label>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <div class="container custom-card">
-                            <input type="range" style="width:90%" />
-                            90
-                        </div>
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked="@timeChecked" @oninput="()=>{ timeChecked=!timeChecked; timeFilter= maxTime;}">
+                        @if (timeChecked)
+                        {
+                            <div class="container custom-card">
+                                <input type="range" style="width:90%" max="@maxTime" @bind="@timeFilter" @bind:event="oninput" />
+                                @maxTime
+                            </div>
+                        }
+
                     </div>
-                    <div class="container" style="padding-bottom:10px">
+                    <div class="container form-check form-switch" style="padding-bottom:10px">
                         <label class="form-check-label" for="flexCheckDefault">
-                            Calories(kcal)
+                            Calories(kcal): @if(caloriesChecked){@caloriesFilter}
                         </label>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <div class="container custom-card">
-                            <input type="range" style="width:90%" />
-                            950
-                        </div>
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked="@caloriesChecked" @oninput="()=> {caloriesChecked=!caloriesChecked; caloriesFilter=maxCalories;}">
+                        @if (caloriesChecked)
+                        {
+                            <div class="container custom-card">
+                                <input type="range" style="width:90%" max="@maxCalories" @bind="@caloriesFilter" @bind:event="oninput" />
+                                @maxCalories.ToString("0")
+                            </div>
+                        }
+
                     </div>
-                    <div class="container" style="padding-bottom:10px">
+                    <div class="container form-check form-switch" style="padding-bottom:10px">
                         <label class="form-check-label" for="flexCheckDefault">
-                            Price($)
+                            Price($): @if(priceChecked){@priceFilter}
                         </label>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <div class="container custom-card">
-                            <input type="range" style="width:90%" />
-                            100.00
-                        </div>
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked="@priceChecked" @oninput="()=> {priceChecked=!priceChecked; priceFilter = maxPrice;}">
+                        @if (priceChecked)
+                        {
+                            <div class="container custom-card">
+                                <input type="range" style="width:90%" max="@maxPrice" @bind="@priceFilter" @bind:event="oninput" />
+                                @maxPrice.ToString("0.00")
+                            </div>
+                        }
+
                     </div>
-                    <div class="container" style="padding-bottom:10px">
+                    <div class="container form-check form-switch" style="padding-bottom:10px">
                         <label class="form-check-label" for="flexCheckDefault">
-                            Ratings
+                            Ratings: @if (ratingsChecked) { @ratingsFilter }
                         </label>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <div class="container custom-card">
-                            <input type="range" style="width:90%" step="1" min="0" max="5" />
-                            5
-                        </div>
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked="@ratingsChecked" @oninput="()=> {ratingsChecked=!ratingsChecked; ratingsFilter= maxRatings;}">
+                        @if (ratingsChecked)
+                        {
+                            <div class="container custom-card">
+                                <input type="range" style="width:90%" step="1" min="0" max="@maxRatings" @bind="@ratingsFilter" @bind:event="oninput" />
+                                @maxRatings.ToString("0.00")
+                            </div>
+                        }
+
                     </div>
                     <div class="container" style="padding-bottom:10px">
                         Difficulty<br />
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked="@expertChecked" @oninput="(()=> expertChecked=!expertChecked)">
                         <label class="form-check-label" for="flexCheckDefault" style="padding-right:7px">
                             Expert
                         </label>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked="@homeCookChecked" @oninput="()=> homeCookChecked=!homeCookChecked">
                         <label class="form-check-label" for="flexCheckDefault" style="padding-right:7px">
                             Home cook
                         </label>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked="@beginnerChecked" @oninput="()=> beginnerChecked=!beginnerChecked">
                         <label class="form-check-label" for="flexCheckDefault " style="padding-right:7px">
                             Beginner
                         </label>
                     </div>
                     <div class="container">
                         Indgredients<br />
-                        <input class="form-control" type="text" placeholder="(e.g Chicken, Lettuce, etc)" aria-label="default input example">
+                        <div style=" width: 100%" class="input-group position-relative d-inline-flex align-items-center">
+                            <input @bind="ingredientInput" @onkeyup="@IngredientChanged" class="form-control d-flex w-100 justify-content-center" placeholder="(e.g Chicken, Lettuce, etc)" aria-label="default input example" />
+
+                            @if (ingredientInput.Length > 0)
+                            {
+
+                                <i @onclick="ClearIngredient" class="bi bi-x-lg position-absolute"
+                               style="
+                                  right: 10px;
+                                  cursor: pointer;
+                                  z-index: 100;">
+                                </i>
+                            }
+                        </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col">
-                                        Saffron
+                            @foreach (var ing in ingredients)
+                            {
+                                <li class="list-group-item" @key="@ing">
+                                    <div class="row">
+                                        <div class="col">
+                                            @ing
+                                        </div>
+                                        <div class="col text-end">
+                                            <span class="oi bi bi-x-circle-fill" style="color:red" @onclick="@(()=>ingredients.Remove(ing))"></span>
+                                        </div>
                                     </div>
-                                    <div class="col text-end">
-                                        <span class="oi bi bi-x-circle-fill" style="color:red"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col">
-                                        Chicken
-                                    </div>
-                                    <div class="col text-end">
-                                        <span class="oi bi bi-x-circle-fill" style="color:red"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col">
-                                        Yogurt
-                                    </div>
-                                    <div class="col text-end">
-                                        <span class="oi bi bi-x-circle-fill" style="color:red"></span>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+                            }
+
+
                         </ul>
                     </div>
                 </div>
@@ -152,6 +167,28 @@
 
 @code{
 
+    public static bool timeChecked { get; set; } = false;
+    public static bool caloriesChecked { get; set; } = false;
+    public static bool priceChecked { get; set; } = false;
+    public static bool ratingsChecked { get; set; } = false;
+    public static bool expertChecked { get; set; } = false;
+    public static bool homeCookChecked { get; set; } = false;
+    public static bool beginnerChecked { get; set; } = false;
+
+    public static int maxTime { get; set; } = 0;
+    public static float maxCalories { get; set; } = 0;
+    public static float maxRatings { get; set; } = 0;
+    public static float maxPrice { get; set; } = 0;
+
+    public static int timeFilter { get; set; } = 0;
+    public static float caloriesFilter { get; set; } = 0;
+    public static float ratingsFilter { get; set; } = 0;
+    public static float priceFilter { get; set; } = 0;
+
+
+    private static ArrayList ingredients = new ArrayList();
+    public static string ingredientInput { get; set; } = "";
+
     string Error = "";
     List<Recipe> recipes = new List<Recipe>();
     Recipe objRecipe = new Recipe();
@@ -163,6 +200,40 @@
         System.Diagnostics.Debug.WriteLine("returned");
         System.Diagnostics.Debug.WriteLine("recipes size is "+ recipes.Count() );
 
+        // setting max values
+        foreach (var recipe in recipes)
+        {
+            int currTIme = recipe.Time;
+            float currCalories = float.Parse(recipe.Calories);
+            float currPrice = recipe.Price;
+            float currRatings =float.Parse( recipe.Rating);
+            if (currTIme > maxTime)
+            {
+                maxTime = currTIme;
+            }
+
+            if (currCalories > maxCalories)
+            {
+                maxCalories = currCalories;
+            }
+
+            if (currPrice > maxPrice)
+            {
+                maxPrice = currPrice;
+            }
+
+            if (currRatings > maxRatings)
+            {
+                maxRatings = currRatings;
+            }
+
+        }
+
+
+        timeFilter = maxTime;
+        caloriesFilter = maxCalories;
+        priceFilter = maxPrice;
+        ratingsFilter = maxRatings;
     }
 
     public RecipeInformation[] recipesArray = new RecipeInformation[]
@@ -172,6 +243,28 @@
 
     };
 
+    private void IngredientChanged(KeyboardEventArgs eventArgs)
+    {
 
+        //ingredientInput = obj.Value.ToString();
+
+        if (eventArgs.Key == "Enter")        // fire on enter
+        {
+            if (ingredientInput.Length > 0)
+            {
+                ingredients.Add(ingredientInput);
+            }
+        }
+        ingredientInput = "";
+
+    }
+
+    private void ClearIngredient()
+    {
+        ingredientInput = "";
+
+    }
+
+    
 
 }
