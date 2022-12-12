@@ -190,7 +190,7 @@
                 newRecipe.Calories = list_calories[random.Next(list_calories.Count)];
                 var list_rating = new List<string> { "1", "2", "3", "4","5" };
                 newRecipe.Rating = list_rating[random.Next(list_rating.Count)];
-                var list_diffculty = new List<string> { "Easy", "Medium", "Hard", "Expert"};
+                var list_diffculty = new List<string> { "Beginner","Home Cook", "Expert"};
                 newRecipe.Difficulty = list_diffculty[random.Next(list_diffculty.Count)];
 
                 var newRecipeObj = await RecipeServiceInj.CreateRecipeAsync(newRecipe);

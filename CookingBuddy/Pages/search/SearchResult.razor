@@ -138,14 +138,18 @@
         <div class="row">
             @foreach (var rec in recipes)
             {
-                RecipeInformation r = new RecipeInformation(author: rec.Author, title: rec.Title, calories: rec.Calories, difficulty: rec.Difficulty, price: rec.Price.ToString(), rating: rec.Rating, time: rec.Time.ToString());
-                String url_with_param = "/ViewRecipe/" + rec.Id;
-                System.Diagnostics.Debug.WriteLine("Url is: " + url_with_param);
-                <div class="col-md-auto">
-                    <a style="text-decoration: none" href=@url_with_param>
-                        <CookingBuddy.Pages.search.components.RecipeCard src=@rec.Media recipe=@r />
-                    </a>
-                </div>
+                if (Search(rec))
+                {
+                    RecipeInformation r = new RecipeInformation(author: rec.Author, title: rec.Title, calories: rec.Calories, difficulty: rec.Difficulty, price: rec.Price.ToString(), rating: rec.Rating, time: rec.Time.ToString());
+                    String url_with_param = "/ViewRecipe/" + rec.Id;
+                    System.Diagnostics.Debug.WriteLine("Url is: " + url_with_param);
+                    <div class="col-md-auto">
+                        <a style="text-decoration: none" href=@url_with_param>
+                            <CookingBuddy.Pages.search.components.RecipeCard src=@rec.Media recipe=@r />
+                        </a>
+                    </div>
+                }
+                
             }
         </div>
     }
@@ -171,9 +175,10 @@
     public static bool caloriesChecked { get; set; } = false;
     public static bool priceChecked { get; set; } = false;
     public static bool ratingsChecked { get; set; } = false;
-    public static bool expertChecked { get; set; } = false;
-    public static bool homeCookChecked { get; set; } = false;
-    public static bool beginnerChecked { get; set; } = false;
+
+    public static bool expertChecked { get; set; } = true;
+    public static bool homeCookChecked { get; set; } = true;
+    public static bool beginnerChecked { get; set; } = true;
 
     public static int maxTime { get; set; } = 0;
     public static float maxCalories { get; set; } = 0;
@@ -265,6 +270,33 @@
 
     }
 
-    
+    private bool Search(Recipe recipe)
+    {
+
+        int currTIme = recipe.Time;
+        float currCalories = float.Parse(recipe.Calories);
+        float currPrice = recipe.Price;
+        float currRatings = float.Parse(recipe.Rating);
+
+        if (currTIme>timeFilter|| currCalories>caloriesFilter || currPrice>priceFilter || currRatings>ratingsFilter)
+        {
+            return false;
+        }
+
+        if ((expertChecked && (recipe.Difficulty.Equals("Expert") || recipe.Difficulty.Equals("Hard"))) || (homeCookChecked && (recipe.Difficulty.Equals("Medium") || recipe.Difficulty.Equals("Home Cook"))) ||(beginnerChecked &&(recipe.Difficulty.Equals("Beginner"))) )
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+
+        
+
+
+
+        return true;
+    }
+
 
 }
