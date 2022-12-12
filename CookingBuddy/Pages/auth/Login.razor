@@ -1,28 +1,37 @@
 ﻿@page "/login"
 
+@using CookingBuddy.Models;
+@using CookingBuddy.Views;
+@using CookingBuddy.Services;
+@inject NavigationManager NavManagerInj;
+@inject UserService UserServiceInj;
+
 <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
             <div class="card shadow-2-strong" style="border-radius: 1rem;">
                 <div class="card-body p-5 text-center">
                     <h1 class="mb-5">Login</h1>
-                    <form>
+                    <EditForm Model="@loginView" OnValidSubmit="@FormSubmitted">
+                        <DataAnnotationsValidator />
+                        @*<ValidationSummary />*@
                         <!-- Email input -->
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <input type="email" @bind-value="@loginView.Email" class="form-control" id="floatingInput" placeholder="name@example.com">
                             <label for="floatingInput">Email address</label>
+                            <ValidationMessage For="@(()=> @loginView.Email)" />
                         </div>
 
-                        <!-- Password input -->
+                         Password input 
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <input type="password" @bind-value="loginView.Password" class="form-control" id="floatingPassword" placeholder="Password">
                             <label for="floatingPassword">Password</label>
+                            <ValidationMessage For="@(()=> @loginView.Password)" />
                         </div>
 
                         <!-- 2 column grid layout for inline styling -->
                         <div class="row mb-3">
                             <div class="col d-flex justify-content-center">
-                                <!-- Checkbox -->
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="rememberCheck" checked />
                                     <label class="form-check-label" for="rememberCheck"> Remember me </label>
@@ -30,14 +39,13 @@
                             </div>
 
                             <div class="col">
-                                <!-- Simple link -->
                                 <a href="/resetlogin">Forgot password?</a>
                             </div>
                         </div>
 
                         <!-- Submit button -->
                         <div class="d-grid">
-                            <button type="button" class="btn btn-primary mb-4">Sign in</button>
+                            <button type="submit" class="btn btn-primary mb-4">Sign in</button>
                         </div>
 
                         <!-- Register buttons -->
@@ -60,9 +68,26 @@
                                 <i class="bi bi-github"></i>
                             </button>
                         </div>
-                    </form>
+                    </EditForm>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@code {
+    LoginView loginView = new();
+
+    private async void FormSubmitted()
+    {
+        var result = UserServiceInj.GetUser(loginView.Email, loginView.Password);
+        if (result != null)
+        {
+            NavManagerInj.NavigateTo("/");
+        }
+        else
+        {
+            await App.Current.MainPage.DisplayAlert("Oops", "Invalid username or password", "OK");
+        }
+    }
+}

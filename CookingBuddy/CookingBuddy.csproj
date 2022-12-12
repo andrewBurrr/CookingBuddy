@@ -79,6 +79,8 @@
       <None Remove="FirebaseStorage.net" />
       <None Remove="Models\" />
       <None Remove="Services\" />
+      <None Remove="Newtonsoft.Json" />
+      <None Remove="Views\" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Pages\home\" />
@@ -91,11 +93,13 @@
       <Folder Include="Pages\learn\components\" />
       <Folder Include="Models\" />
       <Folder Include="Services\" />
+      <Folder Include="Views\" />
     </ItemGroup>
     <ItemGroup>
       <Content Remove="Pages\LetsCook\LetsCook - Copy.razor" />
       <Content Remove="wwwroot\css\bootstrap-icons\" />
       <Content Remove="wwwroot\css\bootstrap-icons\fonts\" />
+      <Content Remove="Resources\Raw\users.json" />
     </ItemGroup>
     <ItemGroup>
       <MauiImage Remove="Resources\Images\profile_picture_placeholder.jpg" />
@@ -109,5 +113,9 @@
       <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
       <PackageReference Include="bootstrap" Version="5.2.2" />
       <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    </ItemGroup>
+    <ItemGroup>
+      <BundleResource Include="Resources\Raw\users.json" />
     </ItemGroup>
 </Project>

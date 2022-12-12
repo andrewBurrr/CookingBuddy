@@ -1,5 +1,7 @@
 ﻿@page "/settings"
 
+@using CookingBuddy.Services;
+
 <div class="container-fluid">
     <h3 class="text-center"><strong>Profile Settings</strong></h3>
 
@@ -18,15 +20,15 @@
         <form class="form-inline" role="form">
             <div class="form-group" style="padding-bottom: 8px">
                 <label for="inputName">Full Name</label>
-                <input type="text" class="form-control" id="inputName" placeholder="Jack Green">
+                <input type="text" class="form-control" id="inputName" placeholder="@UserService.user.UserName">
             </div>
             <div class="form-group" style="padding-bottom: 8px">
                 <label for="inputEmail">Email</label>
-                <input type="email" class="form-control" id="inputEmail" placeholder="name@example.com">
+                <input type="email" class="form-control" id="inputEmail" placeholder="@UserService.user.Email">
             </div>
             <div class="form-group" style="padding-bottom: 8px">
                 <label for="inputPassword">Password</label>
-                <input type="password" class="form-control" id="inputPassword" placeholder="***********">
+                <input type="password" class="form-control" id="inputPassword" placeholder="@UserService.user.Password">
             </div>
             <div class="form-group" style="padding-bottom: 8px">
                 <button type="button" class="btn btn-outline-secondary btn-sm">Change Password</button>
