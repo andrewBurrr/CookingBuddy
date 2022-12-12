@@ -10,91 +10,92 @@
     @if (recipes == null)
     {
         <p><em>Loading...</em></p>
-    }else{
-
-    
-    <div class="container-fluid border border-top border-bottom">
-        <CookingBuddy.Pages.ViewRecipe.components.RecipeTitleBar recipe=@recipeTitle></CookingBuddy.Pages.ViewRecipe.components.RecipeTitleBar>
-    </div>
-    <div class="container-fluid border border-top border-bottom overflow-auto">
-        <CookingBuddy.Pages.ViewRecipe.components.RecipeContentBody recipe=@recipeBody></CookingBuddy.Pages.ViewRecipe.components.RecipeContentBody>
-    </div>
-    <div class="container-fluid border border-top border-bottom">
-        <a href="/LetsCook" class="btn btn-info" role="button">Lets Cook</a>
-    </div>
-    <hr />
-    <h3 style="text-align: center">Reviews</h3>
-    <div class="container-fluid">
-        <div class="card" style="margin-bottom: 10px">
-            <div class="row">
-                <div class="col-auto">
-                    <img src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg" class="img-thumbnail"
-                    style="width: 55px; height: 55px">
-                </div>
-                <div class="col-auto" style="margin: 0">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 16px">Bob Martin</h5>
+    }
+    else
+    {
+        <div class="container-fluid border border-top border-bottom">
+            <CookingBuddy.Pages.ViewRecipe.components.RecipeTitleBar recipe=@recipeTitle></CookingBuddy.Pages.ViewRecipe.components.RecipeTitleBar>
+        </div>
+        <div class="container-fluid border border-top border-bottom overflow-auto">
+            <CookingBuddy.Pages.ViewRecipe.components.RecipeContentBody recipe=@recipeBody></CookingBuddy.Pages.ViewRecipe.components.RecipeContentBody>
+        </div>
+        <div class="container-fluid border border-top border-bottom">
+            <a href="/LetsCook" class="btn btn-info" role="button">Lets Cook</a>
+        </div>
+        <hr />
+        <h3 style="text-align: center">Reviews</h3>
+        <div class="container-fluid">
+            <div class="card" style="margin-bottom: 10px">
+                <div class="row">
+                    <div class="col-auto">
+                        <img src="https://i.pinimg.com/736x/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg" class="img-thumbnail"
+                        style="width: 55px; height: 55px">
+                    </div>
+                    <div class="col-auto" style="margin: 0">
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-size: 16px">Bob Martin</h5>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <h4><span class="bi-star-fill"></span> 3.5</h4>
                     </div>
                 </div>
-                <div class="col-auto">
-                    <h4><span class="bi-star-fill"></span> 3.5</h4>
+                <div class="row" style="margin-top: 8px">
+                    <div class="card-text">
+                        <p class="text-center" style="font-size: 12px">When following this recipe, I found the steak a bit bland, so I would recommend doubling the amount.</p>
+                    </div>
                 </div>
             </div>
-            <div class="row" style="margin-top: 8px">
-                <div class="card-text">
-                    <p class="text-center" style="font-size: 12px">When following this recipe, I found the steak a bit bland, so I would recommend doubling the amount.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col bottom text-center">
-            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#survey">
-                + Leave a Review!
-            </button>
-            <div class="modal fade" id="survey" tabindex="-1" aria-labelledby="surveyLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Survey</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>
-                                How did you like this dish? Help the author perfect their recipe by leaving feedback!
-                            </p>
-                            <form>
-                                <div class=" d-flex justify-content-center">
-                                    <div class="mb-3 d-inline-flex align-items-center">
-                                        <label for="rating" class="form-label">Rating <i class="bi bi-star"></i></label>
-                                        <div class="input-group">
-                                            <select class="form-select" id="rating">
-                                                <option selected>...</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                            </select>
+            <div class="col bottom text-center">
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#survey">
+                    + Leave a Review!
+                </button>
+                <div class="modal fade" id="survey" tabindex="-1" aria-labelledby="surveyLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Survey</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    How did you like this dish? Help the author perfect their recipe by leaving feedback!
+                                </p>
+                                <form>
+                                    <div class=" d-flex justify-content-center">
+                                        <div class="mb-3 d-inline-flex align-items-center">
+                                            <label for="rating" class="form-label">Rating <i class="bi bi-star"></i></label>
+                                            <div class="input-group">
+                                                <select class="form-select" id="rating">
+                                                    <option selected>...</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                            </div>
+                                            <span class="input-group-text">/5</span>
                                         </div>
-                                        <span class="input-group-text">/5</span>
                                     </div>
+                                    <div class="row mb-3">
+                                        <label for="description" class="form-label">Description</label>
+                                        <textarea class="form-control" rows="2"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="btn-group d-flex">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">later</button>
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">submit</button>
                                 </div>
-                                <div class="row mb-3">
-                                    <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" rows="2"></textarea>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="btn-group d-flex">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">later</button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">submit</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
 </div>
 
 @code {
