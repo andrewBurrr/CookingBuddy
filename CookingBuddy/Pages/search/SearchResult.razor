@@ -64,6 +64,7 @@
                         <label class="form-check-label" for="flexCheckDefault">
                             Ratings: @if (ratingsChecked) { @ratingsFilter }
                         </label>
+
                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked="@ratingsChecked" @oninput="()=> {ratingsChecked=!ratingsChecked; ratingsFilter= maxRatings;}">
                         @if (ratingsChecked)
                         {
@@ -120,7 +121,6 @@
                                 </li>
                             }
 
-
                         </ul>
                     </div>
                 </div>
@@ -170,6 +170,15 @@
 </div>
 
 @code{
+    public static bool timeChecked { get; set; } = false;
+    public static bool caloriesChecked { get; set; } = false;
+    public static bool priceChecked { get; set; } = false;
+    public static bool ratingsChecked { get; set; } = false;
+
+    private static ArrayList ingredients = new ArrayList();
+
+    public static string ingredientInput { get; set; } = "";
+
 
     public static bool timeChecked { get; set; } = false;
     public static bool caloriesChecked { get; set; } = false;

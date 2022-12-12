@@ -48,6 +48,9 @@
         <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
         <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>
+    <ItemGroup>
+      <Compile Remove="Pages\add\dataList.cs" />
+    </ItemGroup>
 
     <ItemGroup>
       <None Remove="Blazorise" />
@@ -79,7 +82,6 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Pages\home\" />
-      <Folder Include="Pages\add\" />
       <Folder Include="Pages\home\components\" />
       <Folder Include="Pages\LetsCook\components\" />
       <Folder Include="Pages\RecipeViewLocal\components\" />
@@ -99,6 +101,7 @@
       <MauiImage Remove="Resources\Images\profile_picture_placeholder.jpg" />
     </ItemGroup>
     <ItemGroup>
+      <Content Include="Pages\add\data\dataList.cs" />
       <Content Include="Pages\recipebook\RecipeBook.razor.css" />
     </ItemGroup>
     <ItemGroup>
