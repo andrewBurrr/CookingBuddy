@@ -112,7 +112,7 @@
       <PackageReference Include="QRCoderNetCore" Version="1.0.0" />
       <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
       <PackageReference Include="bootstrap" Version="5.2.2" />
-      <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+      <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     </ItemGroup>
     <ItemGroup>

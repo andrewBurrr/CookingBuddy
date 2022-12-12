@@ -57,8 +57,41 @@
             <h1>Ingredients</h1>
         </div>
         <div class="col-auto">
-            <button type="button" class="btn btn-secondary">Substitute</button>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#substituteModal">
+                Substitute</button>
         </div>
+    </div>
+    <div class="modal fade" id="substituteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Ingredient Substitutes</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h1><span class="bi bi-arrow-right"></span><strong> Butter</strong></h1>
+                    <p><strong>Vegan Butter: </strong> 1 tbsp Butter = 1 tbsp Vegan Butter</p>
+                    <p><strong>Olive Oil: </strong> 1 tbsp Butter = 1 tbsp Olive Oil</p>
+                    <p><strong>Coconut Oil: </strong> 1 tbsp Butter = 1 tbsp Coconut Oil</p>
+
+                    <h1><span class="bi bi-arrow-right"></span><strong> Steak</strong></h1>
+                    <p><strong>Trumpet Mushrooms: </strong>~1 lb steak = 2 cups Trumpet Mushrooms</p>
+                    <p><strong>Firm Tofu: </strong>~1 lb steak = 16 oz Firm Tofu</p>
+                    <p><strong>Chicken Thighs: </strong>~1 lb Steak  = 1 lb Chicken Thighs</p>
+
+                    <h1><span class="bi bi-arrow-right"></span><strong> Steak</strong></h1>
+                    <p><strong>Trumpet Mushrooms: </strong>~1 lb steak = 2 cups Trumpet Mushrooms</p>
+                    <p><strong>Firm Tofu: </strong>~1 lb steak = 16 oz Firm Tofu</p>
+                    <p><strong>Chicken Thighs: </strong>~1 lb Steak  = 1 lb Chicken Thighs</p>
+
+                    <h1><span class="bi bi-arrow-right"></span><strong> Steak</strong></h1>
+                    <p><strong>Trumpet Mushrooms: </strong>~1 lb steak = 2 cups Trumpet Mushrooms</p>
+                    <p><strong>Firm Tofu: </strong>~1 lb steak = 16 oz Firm Tofu</p>
+                    <p><strong>Chicken Thighs: </strong>~1 lb Steak  = 1 lb Chicken Thighs</p>
+                </div>
+            </div>
+        </div>
+
     </div>
     @foreach(var @i in @recipe.ingredients.Split(",")){
     <div class="row align-items-center justify-content-between">
