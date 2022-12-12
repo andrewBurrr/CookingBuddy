@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CookingBuddy.Pages.add.data;
+namespace CookingBuddy.Pages.add;
 
 
 public class dataList
