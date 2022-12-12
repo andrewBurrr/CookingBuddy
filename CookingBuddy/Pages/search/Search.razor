@@ -1,9 +1,10 @@
 ﻿@page "/search"
+@inject NavigationManager NavigationManager
 
 <h1 class="text-center">Search</h1>
 <div class="container">
 
-    <input class="form-control d-flex" type="text" placeholder="Search..." aria-label="default input example">
+    <input class="form-control d-flex" type="text" placeholder="Search..." aria-label="default input example" value="@searchInput" @onchange="OnEnter">
     <br />
 
 
@@ -16,20 +17,34 @@
         <ul class="list-group list-group-flush">
 
             <li class="list-group-item">
-                <NavLink class="nav-link" href="searchResult">
+                <NavLink class="nav-link" href="searchResult/Chicken Tikka Masala">
                     Chicken Tikka Masala
                 </NavLink>
             </li>
             <li class="list-group-item">
-                <NavLink class="nav-link" href="searchResult">
+                <NavLink class="nav-link" href="searchResult/Chicken Fettucine">
                     Chicken Fettucine
                 </NavLink>
             </li>
             <li class="list-group-item">
-                <NavLink class="nav-link" href="searchResult">
+                <NavLink class="nav-link" href="searchResult/Chicken Stew">
                     Chicken Stew
                 </NavLink>
             </li>
         </ul>
     </div>
 </div>
+
+
+@code{
+
+    public static string searchInput { get; set; } = "";
+
+
+
+    void OnEnter(ChangeEventArgs obj)
+    {
+        searchInput = obj.Value.ToString();
+        System.Diagnostics.Debug.WriteLine("Url is: " + searchInput); 
+        NavigationManager.NavigateTo("searchResult/" + searchInput); }
+}

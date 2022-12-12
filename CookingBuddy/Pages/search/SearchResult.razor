@@ -1,4 +1,5 @@
 @page "/searchResult"
+@page "/searchResult/{searchBox}"
 @using CookingBuddy.Models
 @using CookingBuddy.Pages.ViewRecipe.model
 @using CookingBuddy.Services
@@ -8,7 +9,7 @@
 @using CookingBuddy.Pages.search.model;
 
 <div class="container body-container">
-    <input class="form-control" type="text" placeholder="Chicken Tikka Masala" aria-label="default input example">
+    <input class="form-control" type="text" placeholder="Chicken Tikka Masala" aria-label="default input example" @bind="@searchInput" @bind:event="oninput">
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
@@ -193,12 +194,18 @@
     private static ArrayList ingredients = new ArrayList();
     public static string ingredientInput { get; set; } = "";
 
+    [Parameter]
+    public string searchBox { get; set; }="";
+
+    public static string searchInput { get; set; } = "";
+
     string Error = "";
     List<Recipe> recipes = new List<Recipe>();
     Recipe objRecipe = new Recipe();
 
     protected override async Task OnInitializedAsync()
     {
+        searchInput = searchBox;
         System.Diagnostics.Debug.WriteLine("Called");
         recipes = await RecipeServiceInj.GetRecipeAsync();
         System.Diagnostics.Debug.WriteLine("returned");
@@ -277,7 +284,8 @@
         float currPrice = recipe.Price;
         float currRatings = float.Parse(recipe.Rating);
 
-        if (currTIme>timeFilter|| currCalories>caloriesFilter || currPrice>priceFilter || currRatings>ratingsFilter)
+        if (currTIme > timeFilter || currCalories > caloriesFilter || currPrice > priceFilter || currRatings > ratingsFilter || (!recipe.Title.ToUpper().Contains(searchInput.ToUpper()) && !searchInput.ToUpper().Contains(recipe.Title.ToUpper())) 
+        || (!recipe.Author.ToUpper().Contains(searchInput.ToUpper()) && !searchInput.ToUpper().Contains(recipe.Author.ToUpper())))
         {
             return false;
         }
