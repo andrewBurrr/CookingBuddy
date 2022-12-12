@@ -142,7 +142,7 @@
                 if (Search(rec))
                 {
                     RecipeInformation r = new RecipeInformation(author: rec.Author, title: rec.Title, calories: rec.Calories, difficulty: rec.Difficulty, price: rec.Price.ToString(), rating: rec.Rating, time: rec.Time.ToString());
-                    String url_with_param = "/ViewRecipe/" + rec.Id;
+                    String url_with_param = "/ViewRecipe/";
                     System.Diagnostics.Debug.WriteLine("Url is: " + url_with_param);
                     <div class="col-md-auto">
                         <a style="text-decoration: none" href=@url_with_param>
@@ -210,10 +210,11 @@
         recipes = await RecipeServiceInj.GetRecipeAsync();
         System.Diagnostics.Debug.WriteLine("returned");
         System.Diagnostics.Debug.WriteLine("recipes size is "+ recipes.Count() );
-
         // setting max values
         foreach (var recipe in recipes)
         {
+            recipe.Media = "https://makeyourmeals.com/wp-content/uploads/2019/06/featured-grilled-steak-735x490.jpg.webp";
+            recipe.Title = "Grilled Steak";
             int currTIme = recipe.Time;
             float currCalories = float.Parse(recipe.Calories);
             float currPrice = recipe.Price;
