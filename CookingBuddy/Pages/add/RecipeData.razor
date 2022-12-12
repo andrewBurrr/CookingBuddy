@@ -1,0 +1,17 @@
+﻿@using CookingBuddy.Pages.add.data;
+@using CookingBuddy.Pages.LetsCook.model;
+
+<h3>RecipeData</h3>
+
+@code {
+    //List for recipe titles
+    dataList titleData = new dataList(new String[]{"Alfredo Chicken", "Apple Crumble Pie", "Banana Bread", 
+                                            "Chicken Tikka Masala", "Chicken Stew", "Shepherd's Pie"});
+
+    //List for ingredients
+    dataList ingredientsData = new dataList(new String[]{"Sugar", "Salt", "Butter", "Cheese",
+                                            "Margarine", "Egg", "Flour", "Milk", "Parsley"});
+
+    //List for ingredients
+    dataList unitsData = new dataList(new String[]{"tsp", "tbsp", "cups", "pinch", "mL", "L"});
+}
