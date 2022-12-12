@@ -1,7 +1,7 @@
 ﻿@page "/post"
 @using CookingBuddy.Models
 @using CookingBuddy.Services
-@using CookingBuddy.Pages.add.data;
+@using System.Collections.Generic;
 @inject RecipeService RecipeServiceInj
 @using CookingBuddy.Pages.add;
 @using System.Collections;
@@ -312,6 +312,16 @@
                 newRecipe.Price = recipe.Price;
                 newRecipe.Yield = recipe.Yield;
                 newRecipe.Time = recipe.Time;
+                var list_autors = new List<string> { "Alice", "Bob", "John Doe", "Jane Doe", };
+                var random = new Random();
+                newRecipe.Author = list_autors[random.Next(list_autors.Count)];
+                var list_calories = new List<string> { "300", "350", "400", "200","1000","1500" };
+                newRecipe.Calories = list_calories[random.Next(list_calories.Count)];
+                var list_rating = new List<string> { "1", "2", "3", "4","5" };
+                newRecipe.Rating = list_rating[random.Next(list_rating.Count)];
+                var list_diffculty = new List<string> { "Beginner","Home Cook", "Expert"};
+                newRecipe.Difficulty = list_diffculty[random.Next(list_diffculty.Count)];
+
                 var newRecipeObj = await RecipeServiceInj.CreateRecipeAsync(newRecipe);
 
             }
