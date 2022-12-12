@@ -284,8 +284,7 @@
         float currPrice = recipe.Price;
         float currRatings = float.Parse(recipe.Rating);
 
-        if (currTIme > timeFilter || currCalories > caloriesFilter || currPrice > priceFilter || currRatings > ratingsFilter || (!recipe.Title.ToUpper().Contains(searchInput.ToUpper()) && !searchInput.ToUpper().Contains(recipe.Title.ToUpper())) 
-        || (!recipe.Author.ToUpper().Contains(searchInput.ToUpper()) && !searchInput.ToUpper().Contains(recipe.Author.ToUpper())))
+        if (currTIme > timeFilter || currCalories > caloriesFilter || currPrice > priceFilter || currRatings > ratingsFilter || (!recipe.Title.ToUpper().Contains(searchInput.ToUpper()) && !searchInput.ToUpper().Contains(recipe.Title.ToUpper())))
         {
             return false;
         }
